@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ModuleWarden · the policy layer for npm</title>
-  <meta name="description" content="Stop trusting your dependencies. Start gating them. ModuleWarden audits every npm version before it lands in your codebase." />
-  <meta property="og:title" content="ModuleWarden · gate npm before it gates you" />
-  <meta property="og:description" content="The policy layer between your developers and npm. Every version, every install, audited before it ships." />
+  <title>ModuleWarden · the dependency firewall for cyber-insurable software</title>
+  <meta name="description" content="Stop trusting your dependencies. Start gating them. ModuleWarden is a self-hosted npm registry proxy with deterministic policy rules, quarantine, and audit memos." />
+  <meta property="og:title" content="ModuleWarden · the dependency firewall for cyber-insurable software" />
+  <meta property="og:description" content="Self-hosted npm registry proxy. Deterministic policy gate. Quarantine plus audit memos. Underwriting-grade evidence for cyber insurance." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://modulewarden.com" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -50,6 +50,11 @@
 </head>
 <body class="bg-slate-950 text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-100">
 
+<!-- hackathon banner -->
+<div class="bg-amber-500/10 border-b border-amber-500/20 text-center py-2 text-xs text-amber-200">
+  <span class="mono">Built at Zero-One Hack Vienna 2026</span> · UNIQA Insurance track · <a href="https://github.com/ademczuk/apiary" class="underline hover:text-amber-100">public hackathon repo</a>
+</div>
+
 <!-- nav -->
 <nav class="border-b border-slate-800/60 backdrop-blur-md sticky top-0 z-50 bg-slate-950/70">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -61,10 +66,11 @@
     </a>
     <div class="hidden md:flex items-center gap-7 text-sm">
       <a href="#how" class="text-slate-400 hover:text-slate-100 transition">How it works</a>
+      <a href="#insurance" class="text-slate-400 hover:text-slate-100 transition">Insurance</a>
       <a href="#integrations" class="text-slate-400 hover:text-slate-100 transition">Integrations</a>
       <a href="#pricing" class="text-slate-400 hover:text-slate-100 transition">Pricing</a>
       <a href="#faq" class="text-slate-400 hover:text-slate-100 transition">FAQ</a>
-      <a href="https://github.com/apetersson/ModuleWarden" class="text-slate-400 hover:text-slate-100 transition">GitHub</a>
+      <a href="https://github.com/ademczuk/apiary" class="text-slate-400 hover:text-slate-100 transition">GitHub</a>
     </div>
     <a href="#early" class="bg-emerald-500 text-slate-950 px-4 py-2 rounded-md font-semibold text-sm hover:bg-emerald-400 transition">Get early access</a>
   </div>
@@ -78,12 +84,13 @@
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
       Built for the post-postmark-mcp era
     </div>
+    <p class="text-base md:text-lg text-emerald-300 font-medium mb-4 tracking-tight">The dependency firewall for cyber-insurable software.</p>
     <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-7 leading-[1.05]">
       Stop trusting your<br/>dependencies.
       <span class="gradient-text">Start gating them.</span>
     </h1>
     <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-      ModuleWarden is the policy layer between your developers and npm. Every version, every install, audited in an isolated sandbox before it lands in your codebase.
+      ModuleWarden is a self-hosted npm registry proxy. Deterministic rules gate every install. Quarantined releases land alongside a git-committed audit memo. Your insurer gets evidence, your developers keep their velocity.
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
       <a href="#early" class="w-full sm:w-auto bg-emerald-500 text-slate-950 px-6 py-3 rounded-md font-semibold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
@@ -102,19 +109,17 @@
         <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
         <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
         <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
-        <span class="ml-3 text-xs text-slate-500 mono">~/your-repo · npm install · routed through modulewarden</span>
+        <span class="ml-3 text-xs text-slate-500 mono">~/your-repo · npm install · routed through apiary</span>
       </div>
       <div class="p-6 mono text-sm space-y-1.5 leading-relaxed">
         <div><span class="text-emerald-400">$</span> <span class="text-slate-100">npm install postmark-mcp@1.0.16</span></div>
-        <div class="text-slate-500">  &gt; fetching v1.0.15 baseline (last allowed)...</div>
-        <div class="text-slate-500">  &gt; fetching v1.0.16 candidate...</div>
-        <div class="text-slate-500">  &gt; running bounded diff audit (sandboxed)...</div>
-        <div class="text-yellow-300">  ⚠ new postinstall script</div>
-        <div class="text-yellow-300">  ⚠ outbound network call added: post to <span class="text-yellow-200">api.attacker.tld/exfil</span></div>
-        <div class="text-yellow-300">  ⚠ environment variable read: SMTP_USER, SMTP_PASS</div>
-        <div class="text-red-400">  ✗ BLOCKED  risk=0.94  policy=team-defaults  ref=incident-2511</div>
-        <div class="text-slate-500">  &gt; posted to #security · runbook attached · audit log: aud_7f3e2</div>
-        <div class="text-slate-500">  &gt; use <span class="text-slate-300">mw approve aud_7f3e2</span> to override (requires approver)</div>
+        <div class="text-slate-500">  &gt; routing through apiary registry...</div>
+        <div class="text-slate-500">  &gt; policy gate evaluating...</div>
+        <div class="text-red-400">  ✗ release-age: 3 days (policy: &ge;14)</div>
+        <div class="text-red-400">  ✗ install-script: postinstall calls https://api.attacker.tld/r</div>
+        <div class="text-red-400">  ✗ source-match: no repository.url declared</div>
+        <div class="text-yellow-300">  &gt; QUARANTINED  policy=team-default  audit memo: aud_7f3e2.md</div>
+        <div class="text-emerald-300">  &gt; safe fallback available: postmark-mcp@1.0.12 (last allow-listed)</div>
         <div class="pt-1"><span class="text-emerald-400">$</span> <span class="text-slate-200">_</span><span class="cursor text-emerald-400">▊</span></div>
       </div>
     </div>
@@ -143,9 +148,9 @@
         <p class="text-xs text-slate-600 mt-1">Compromise to first install</p>
       </div>
       <div>
-        <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">0</div>
-        <p class="text-xs text-slate-500 uppercase tracking-wider">audit logs by default</p>
-        <p class="text-xs text-slate-600 mt-1">npm install gives you nothing</p>
+        <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">&euro;1.4M</div>
+        <p class="text-xs text-slate-500 uppercase tracking-wider">avg supply-chain claim</p>
+        <p class="text-xs text-slate-600 mt-1">Coalition Cyber Threat Index 2024</p>
       </div>
     </div>
   </div>
@@ -188,6 +193,43 @@
   </div>
 </section>
 
+<!-- insurance positioning -->
+<section id="insurance" class="py-24 border-t border-slate-800/60 bg-gradient-to-b from-slate-900/40 to-slate-950">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl">
+      <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">For cyber insurance</h2>
+      <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Underwriting-grade evidence.</h3>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        Cyber underwriters need attestable controls, not screenshots of a dashboard. ModuleWarden produces a Control Evidence Memo for every policy decision. Reviewable, reproducible, and ready for your insurer's compliance team.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 mt-14">
+      <div class="bg-slate-900/60 border border-emerald-500/20 rounded-xl p-6 hover:border-emerald-500/40 transition">
+        <div class="w-10 h-10 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+        </div>
+        <h4 class="font-semibold text-base mb-2">Attestable controls</h4>
+        <p class="text-sm text-slate-400 leading-relaxed">Every install gated by deterministic rules plus an audit memo. Auditable. Reproducible. Reviewable by your insurer's compliance team. The control either fires or it doesn't, and the evidence sits in git.</p>
+      </div>
+      <div class="bg-slate-900/60 border border-emerald-500/20 rounded-xl p-6 hover:border-emerald-500/40 transition">
+        <div class="w-10 h-10 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
+        </div>
+        <h4 class="font-semibold text-base mb-2">Loss-path reduction</h4>
+        <p class="text-sm text-slate-400 leading-relaxed">Blocks the supply-chain attack class that drives avg &euro;1.4M cyber claims (Coalition Cyber Threat Index 2024). A demonstrable pre-install control. Potential premium discount on cyber policies for organizations that can attest to it.</p>
+      </div>
+      <div class="bg-slate-900/60 border border-emerald-500/20 rounded-xl p-6 hover:border-emerald-500/40 transition">
+        <div class="w-10 h-10 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        </div>
+        <h4 class="font-semibold text-base mb-2">Compliance-ready artifacts</h4>
+        <p class="text-sm text-slate-400 leading-relaxed">Every policy decision generates a Control Evidence Memo (Markdown, machine-readable JSON, audit log). Drop it into your SOC 2 or ISO 27001 evidence pack. Same artifact serves the auditor and the underwriter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- how it works -->
 <section id="how" class="py-24 border-t border-slate-800/60 bg-slate-900/20">
   <div class="max-w-6xl mx-auto px-6">
@@ -195,7 +237,7 @@
       <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">How it works</h2>
       <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">A policy gate. Not another scanner.</h3>
       <p class="text-lg text-slate-400 leading-relaxed">
-        ModuleWarden runs between your package manager and the registry. Every <span class="mono text-slate-300">npm install</span> routes through the gate. The gate runs a bounded audit. The audit produces a decision. Your CI either gets the package or gets a clear reason it was blocked.
+        Apiary runs between your package manager and the registry. Every <span class="mono text-slate-300">npm install</span> routes through the gate. Deterministic rules fire first, an optional LLM audit runs second. Your CI either gets the package or gets a quarantine notice with a clear, auditable reason.
       </p>
     </div>
 
@@ -204,29 +246,36 @@
         <div class="flex gap-4">
           <div class="flex-shrink-0 w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 mono">1</div>
           <div>
-            <h4 class="font-semibold text-lg mb-1.5">Bounded diff, not the whole world</h4>
-            <p class="text-slate-400 leading-relaxed">Each audit reviews version N to N+1 of one package. Not the 3M-package npm ecosystem. The signal-to-noise actually works in our favor.</p>
+            <h4 class="font-semibold text-lg mb-1.5">Self-hosted registry proxy</h4>
+            <p class="text-slate-400 leading-relaxed">Point npm, pnpm, or yarn at it. No client changes, no SDK to install, no developer workflow disruption. One <span class="mono text-slate-300">.npmrc</span> line and you are gated.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="flex-shrink-0 w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 mono">2</div>
           <div>
-            <h4 class="font-semibold text-lg mb-1.5">Private prompts, private rubric</h4>
-            <p class="text-slate-400 leading-relaxed">Attackers cannot game what they cannot see. Your review criteria live in your org. We never publish them. Each customer's rubric drifts independently as new attack patterns emerge.</p>
+            <h4 class="font-semibold text-lg mb-1.5">Deterministic policy gate</h4>
+            <p class="text-slate-400 leading-relaxed">Five built-in rules fire on every install: release-age (default &ge;14 days), install scripts disabled, SRI checksum verification, source-match (repository.url matches the tarball), and an allowlist check. Rules either pass or fail. No probabilistic scores, no judgment calls.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="flex-shrink-0 w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 mono">3</div>
           <div>
-            <h4 class="font-semibold text-lg mb-1.5">Sandboxed audit harness</h4>
-            <p class="text-slate-400 leading-relaxed">The audit runs in a one-shot Docker container with no network, no host mounts, no secrets. Even if the package is actively malicious, the blast radius is zero. The container terminates, the verdict ships, the harness disappears.</p>
+            <h4 class="font-semibold text-lg mb-1.5">Quarantine plus git-driven audit memo</h4>
+            <p class="text-slate-400 leading-relaxed">Every policy update writes a sibling <span class="mono text-slate-300">.md</span> rationale committed alongside <span class="mono text-slate-300">policy.json</span>. Works across branches. Reviewers see the decision, the inputs, and the dissent in one diff. PR-native compliance.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="flex-shrink-0 w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 mono">4</div>
           <div>
-            <h4 class="font-semibold text-lg mb-1.5">Three outcomes, every one logged</h4>
-            <p class="text-slate-400 leading-relaxed">Allow, quarantine, or block. Every decision streams to your SIEM with the reasoning, the diff, and the policy that fired. Your auditors will have actual answers.</p>
+            <h4 class="font-semibold text-lg mb-1.5">Private LLM audit</h4>
+            <p class="text-slate-400 leading-relaxed">Configurable backend: OpenAI, Ollama, or the local Dwarfstar runtime. 25 percent of the context window is reserved for your rubric, 75 percent for the package contents. Bring your own model if regulation requires it.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 mono">5</div>
+          <div>
+            <h4 class="font-semibold text-lg mb-1.5">Pre-audited cache</h4>
+            <p class="text-slate-400 leading-relaxed">Seed the cache with your top-N packages. Only approved versions are served from cache. Dev velocity stays where it was, the supply-chain risk floor moves up.</p>
           </div>
         </div>
       </div>
@@ -240,33 +289,32 @@
        │  npm install foo@2.1.0
        ▼
   ┌──────────────────────────┐
-  │  <span class="text-emerald-400">ModuleWarden Gate</span>       │
+  │  <span class="text-emerald-400">Apiary Registry Proxy</span>   │
   │  (Verdaccio + policy)    │
   └────────────┬─────────────┘
                │
-               ├─ fetch v2.0.4 (last allowed)
-               ├─ fetch v2.1.0 (proposed)
-               │
                ▼
   ┌──────────────────────────┐
-  │  <span class="text-yellow-300">Audit Container</span>          │
-  │  Docker · no net · 1-shot │
-  │  Bounded diff + rubric    │
+  │  <span class="text-yellow-300">Policy Gate (5 rules)</span>    │
+  │  release-age, scripts,   │
+  │  SRI, source-match, allow│
+  │  + optional LLM audit    │
   └────────────┬─────────────┘
                │
                ▼
   ┌──────────────────────────┐
-  │  <span class="text-emerald-400">Policy Decision</span>          │
-  │  + audit log &gt; SIEM       │
+  │  <span class="text-emerald-400">Decision + Audit Memo</span>    │
+  │  policy.json + aud_*.md  │
+  │  committed to git        │
   └────────────┬─────────────┘
                │
        ┌───────┼────────┐
        ▼       ▼        ▼
     <span class="text-emerald-400">allow</span>  <span class="text-yellow-400">quarantine</span>  <span class="text-red-400">block</span>
        │       │
-       │       └─&gt; Slack approval (one click)
+       │       └─ Slack or PR review path
        ▼
-   <span class="text-slate-400">tarball &gt; cache &gt; developer</span>
+   <span class="text-slate-400">tarball / cache / developer</span>
 </pre>
       </div>
     </div>
@@ -306,7 +354,7 @@
           <div class="text-4xl">🐝</div>
           <div>
             <h4 class="font-bold text-lg mb-2">Pairs with Bumblebee</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source endpoint scanner feeds ModuleWarden your installed-package inventory from every developer laptop and CI runner. Baseline risk score, org-wide, in one shot. The two tools are built for each other.</p>
+            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source endpoint scanner feeds Apiary your installed-package inventory from every developer laptop and CI runner. Baseline risk profile, org-wide, in one shot. The two tools are built for each other.</p>
           </div>
         </div>
       </div>
@@ -325,7 +373,7 @@
       <div class="text-xs text-slate-500 uppercase tracking-widest mb-4">Install in 30 seconds</div>
 <pre class="mono text-sm text-slate-300 leading-relaxed bg-slate-950/50 border border-slate-800 rounded-md p-5 overflow-x-auto">
 <span class="text-slate-500"># self-host the gate</span>
-<span class="text-emerald-400">$</span> docker run -p 4873:4873 -v mw-data:/data ghcr.io/modulewarden/gate:latest
+<span class="text-emerald-400">$</span> docker run -p 4873:4873 -v mw-data:/data ghcr.io/ademczuk/apiary:latest
 
 <span class="text-slate-500"># point npm at it</span>
 <span class="text-emerald-400">$</span> npm config set registry http://localhost:4873/
@@ -360,7 +408,7 @@
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> CLI + REST API</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> GitHub-issue support</li>
         </ul>
-        <a href="https://github.com/apetersson/ModuleWarden" class="block text-center w-full py-2.5 rounded-md border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition font-medium text-sm">Start on GitHub</a>
+        <a href="https://github.com/ademczuk/apiary" class="block text-center w-full py-2.5 rounded-md border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition font-medium text-sm">Start on GitHub</a>
       </div>
 
       <div class="bg-slate-900 border-2 border-emerald-500 rounded-xl p-8 relative flex flex-col shadow-2xl shadow-emerald-500/10">
@@ -413,10 +461,34 @@
     <div class="space-y-3">
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
         <summary class="flex items-center justify-between font-semibold">
+          <span>Is this insurable as a cyber-policy control?</span>
+          <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Yes. Apiary produces Control Evidence Memos (markdown plus JSON plus audit log) compatible with SOC 2, ISO 27001, and cyber-insurance underwriting questionnaires. Talk to your insurer about premium tier eligibility.</p>
+      </details>
+
+      <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>Does it replace my SCA scanner (Snyk, Dependabot)?</span>
+          <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. Apiary is a pre-install gate, your SCA runs post-install. Different positions in the stack, both useful, they stack.</p>
+      </details>
+
+      <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
+        <summary class="flex items-center justify-between font-semibold">
+          <span>What if a developer needs a fresh package right now?</span>
+          <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Quarantine generates a one-click review path via Slack or git PR. Approved packages join the allowlist with a written rationale. The 14-day age rule is per-environment: warn in dev, enforce in pre-prod.</p>
+      </details>
+
+      <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
+        <summary class="flex items-center justify-between font-semibold">
           <span>Is this just another SCA tool?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. SCA tools tell you which already-installed packages have known CVEs. ModuleWarden gates each install request before it executes. Different position in the stack, different problem solved. Use both.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. SCA tools tell you which already-installed packages have known CVEs. Apiary gates each install request before it executes. Different position in the stack, different problem solved. Use both.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -424,7 +496,7 @@
           <span>Doesn't this break our CI?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Allowed versions are cached. Repeated installs hit the cache, sub-100ms. New-version installs add ~3-8 seconds for the audit. Quarantine is async, the install resolves with a clear "pending approval" message, and your CI gets a one-click resume from Slack.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Allowed versions are cached. Repeated installs hit the cache, sub-100ms. New-version installs add a few seconds for the policy check. Quarantine is async, the install resolves with a clear "pending approval" message, and your CI gets a one-click resume from Slack.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -432,7 +504,7 @@
           <span>What if the audit LLM is wrong?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">False positives are reviewed by your approver in one click. False negatives are caught by the rule layer (static analysis runs in parallel with the model audit, and either can fail the policy). The model is one input. Your policy is the source of truth.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">The LLM is one input. The five deterministic rules are the source of truth. If a release fails release-age or source-match, the package is quarantined regardless of what the model says. False positives from the model get reviewed by your approver in one click; false negatives are caught by the rule layer.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -440,7 +512,7 @@
           <span>Do you send our package contents anywhere?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Self-host: nothing leaves your network. Cloud: only public-registry packages are audited against our hosted LLM. Private packages stay in your perimeter via the bring-your-own-endpoint option on Enterprise. Your rubric and your decisions are encrypted at rest with a customer-held KMS key.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Self-host: nothing leaves your network. Cloud: only public-registry packages get audited against our hosted LLM. Private packages stay in your perimeter via the bring-your-own-endpoint option on Enterprise. Your rubric and your decisions are encrypted at rest with a customer-held KMS key.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -508,7 +580,7 @@
         <span class="text-sm text-slate-500">ModuleWarden · 2026 · Built in Vienna 🇦🇹</span>
       </div>
       <div class="flex items-center gap-6 text-sm text-slate-500">
-        <a href="https://github.com/apetersson/ModuleWarden" class="hover:text-slate-300 transition">GitHub</a>
+        <a href="https://github.com/ademczuk/apiary" class="hover:text-slate-300 transition">GitHub</a>
         <a href="#" class="hover:text-slate-300 transition">Docs</a>
         <a href="#" class="hover:text-slate-300 transition">Status</a>
         <a href="#" class="hover:text-slate-300 transition">Privacy</a>
@@ -516,7 +588,7 @@
       </div>
     </div>
     <div class="mt-6 pt-6 border-t border-slate-800/60 text-xs text-slate-600 text-center">
-      Sources: <a href="https://www.sonatype.com/press-releases/q2-2025-open-source-malware-index" class="hover:text-slate-400 underline">Sonatype Q2 2025 Open-Source Malware Index</a> · <a href="https://snyk.io/blog/malicious-mcp-server-on-npm-postmark-mcp-harvests-emails/" class="hover:text-slate-400 underline">Snyk postmark-mcp writeup</a> · <a href="https://github.com/ossf/malicious-packages" class="hover:text-slate-400 underline">OSSF malicious-packages corpus</a>
+      Sources: <a href="https://www.sonatype.com/press-releases/q2-2025-open-source-malware-index" class="hover:text-slate-400 underline">Sonatype Q2 2025 Open-Source Malware Index</a> · <a href="https://snyk.io/blog/malicious-mcp-server-on-npm-postmark-mcp-harvests-emails/" class="hover:text-slate-400 underline">Snyk postmark-mcp writeup</a> · <a href="https://github.com/ossf/malicious-packages" class="hover:text-slate-400 underline">OSSF malicious-packages corpus</a> · <a href="https://www.coalitioninc.com/insights/cyber-threat-index" class="hover:text-slate-400 underline">Coalition Cyber Threat Index 2024</a>
     </div>
   </div>
 </footer>
