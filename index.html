@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ModuleWarden · the dependency firewall for cyber-insurable software</title>
-  <meta name="description" content="Stop trusting your dependencies. Start gating them. ModuleWarden is a self-hosted npm registry proxy with deterministic policy rules, quarantine, and audit memos." />
+  <meta name="description" content="Stop trusting your dependencies. Start gating them. ModuleWarden is a self-hosted npm registry proxy with deterministic policy rules, quarantine, audit memos, and a conversational underwriter assistant." />
   <meta property="og:title" content="ModuleWarden · the dependency firewall for cyber-insurable software" />
-  <meta property="og:description" content="Self-hosted npm registry proxy. Deterministic policy gate. Quarantine plus audit memos. Underwriting-grade evidence for cyber insurance." />
+  <meta property="og:description" content="Self-hosted npm registry proxy plus conversational underwriter assistant. Deterministic policy gate, audit memos, control-class credit signal for cyber underwriters." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://modulewarden.com" />
   <meta property="og:image" content="https://ademczuk.github.io/modulewarden-website/og-card.png" />
@@ -69,6 +69,7 @@
     </a>
     <div class="hidden md:flex items-center gap-7 text-sm">
       <a href="#how" class="text-slate-400 hover:text-slate-100 transition">How it works</a>
+      <a href="#assistant" class="text-slate-400 hover:text-slate-100 transition">Assistant</a>
       <a href="#insurance" class="text-slate-400 hover:text-slate-100 transition">Insurance</a>
       <a href="#integrations" class="text-slate-400 hover:text-slate-100 transition">Integrations</a>
       <a href="#pricing" class="text-slate-400 hover:text-slate-100 transition">Pricing</a>
@@ -234,6 +235,66 @@
         </div>
         <h4 class="font-semibold text-base mb-2">Approval is the only sound gate</h4>
         <p class="text-sm text-slate-400 leading-relaxed">The right time to block a malicious package is before it executes. ModuleWarden enforces that gate without slowing down legitimate work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- conversational underwriter assistant -->
+<section id="assistant" class="py-24 border-t border-slate-800/60">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">Conversational AI</h2>
+      <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Natural-language risk briefing on every release.</h3>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        The audit pipeline produces a deterministic verdict and an evidence memo. The Underwriter Assistant is the conversational front-end over that pipeline. A UNIQA cyber-policy underwriter types a question in plain English and receives a verdict, an underwriting implication, the cited findings, and a memo path to attach to the policy file. Built for the UNIQA Track 02 brief on conversational AI and model integration across insurance products.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-8 items-start">
+      <div class="md:col-span-3 bg-slate-900/80 border border-slate-800 rounded-xl glow overflow-hidden">
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-800 bg-slate-900/50">
+          <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+          <span class="ml-3 text-xs text-slate-500 mono">ModuleWarden Underwriter Assistant</span>
+        </div>
+        <div class="p-6 mono text-sm space-y-3 leading-relaxed">
+          <div class="text-slate-500">underwriter:</div>
+          <div class="text-slate-100">Is postmark-mcp@1.0.16 safe to underwrite?</div>
+
+          <div class="text-emerald-400 mt-4">assistant:</div>
+          <div class="text-slate-100"><span class="text-red-400">postmark-mcp@1.0.16  ::  VERDICT: BLOCK  ::  risk_level=critical</span></div>
+          <div class="text-slate-300">Patch release adds install-time execution, broad credential access, and a runtime BCC-injection on every outbound mail. Not justified by the package purpose or changelog.</div>
+          <div class="text-emerald-300 mt-2"><span class="font-bold">Underwriting implication.</span> Should fail the supply-chain section of the underwriting questionnaire. If the client has this version on the dependency surface, control-class credit is not applicable until they pin to the last-known-clean release (1.0.15).</div>
+          <div class="text-slate-500 mt-3">Control Evidence Memo: <span class="text-slate-300">demo/outputs/postmark-mcp-1.0.16__2026-05-28.md</span></div>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 space-y-6">
+        <div class="bg-slate-900/40 border border-emerald-500/20 rounded-xl p-6">
+          <div class="text-xs text-emerald-400 uppercase tracking-wider mb-2">What the assistant does</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-1">&middot;</span><span>Verdict on a specific package and version, in underwriting language</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-1">&middot;</span><span>Walks the 5-rule deterministic gate when asked</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-1">&middot;</span><span>Cites the Control Evidence Memo path for the policy file</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-1">&middot;</span><span>Frames each finding as control-class credit signal at policy bind</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-1">&middot;</span><span>Falls back honestly when it does not have an audit dossier yet</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-2">Try it in 30 seconds</div>
+<pre class="mono text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-md p-4 overflow-x-auto">
+<span class="text-slate-500"># CLI (no UI deps)</span>
+<span class="text-emerald-400">$</span> python -m chat.cli \
+   "look up postmark-mcp@1.0.16"
+
+<span class="text-slate-500"># UI</span>
+<span class="text-emerald-400">$</span> pip install -r chat/requirements.txt
+<span class="text-emerald-400">$</span> streamlit run chat/app.py
+</pre>
+        </div>
       </div>
     </div>
   </div>
