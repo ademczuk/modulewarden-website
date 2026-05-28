@@ -8,11 +8,14 @@
   <meta property="og:title" content="ModuleWarden · the dependency firewall for cyber-insurable software" />
   <meta property="og:description" content="Self-hosted npm registry proxy plus conversational underwriter assistant. Deterministic policy gate, audit memos, control-class credit signal for cyber underwriters." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://modulewarden.com" />
+  <meta property="og:url" content="https://ademczuk.github.io/modulewarden-website/" />
   <meta property="og:image" content="https://ademczuk.github.io/modulewarden-website/og-card.png" />
+  <meta property="og:site_name" content="ModuleWarden" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ModuleWarden · the dependency firewall for cyber-insurable software" />
+  <meta name="twitter:description" content="Self-hosted npm registry proxy plus conversational underwriter assistant. Deterministic policy gate, audit memos, control-class credit signal for cyber underwriters." />
   <meta name="twitter:image" content="https://ademczuk.github.io/modulewarden-website/og-card.png" />
-  <link rel="canonical" href="https://modulewarden.com" />
+  <link rel="canonical" href="https://ademczuk.github.io/modulewarden-website/" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23064e3b'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%2334d399' font-family='monospace' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -142,7 +145,7 @@
     <div class="grid md:grid-cols-3 gap-4">
       <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition">
         <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs font-bold mono text-red-400">CVE-2018-16487</span>
+          <span class="text-xs font-bold mono text-red-400">flatmap-stream@0.1.1</span>
           <span class="text-xs text-slate-600">·</span>
           <span class="text-xs text-slate-500">Nov 2018</span>
         </div>
@@ -762,7 +765,7 @@
     <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Get early access</h2>
     <p class="text-slate-400 mb-10 leading-relaxed">We are rolling out to design partners now. Tell us about your stack and we will be in touch within 24 hours.</p>
 
-    <form id="early-form" action="mailto:hello@modulewarden.com" method="POST" enctype="text/plain" class="space-y-3 text-left">
+    <form id="early-form" class="space-y-3 text-left" novalidate>
       <input type="hidden" name="_subject" value="ModuleWarden early-access request" />
       <div>
         <label class="block text-xs text-slate-500 mb-1.5 uppercase tracking-wider">Work email</label>
@@ -789,16 +792,30 @@
     </form>
     <p class="text-xs text-slate-600 mt-4">No credit card. No spam. We respond within one business day. Prefer email directly? <a href="mailto:hello@modulewarden.com?subject=Early%20access%20request" class="underline hover:text-slate-400">hello@modulewarden.com</a></p>
     <script>
-      // Open a prefilled mailto in the user's email client, bypassing the spotty browser handling of form action=mailto.
+      // Open a prefilled mailto in the user's email client. Bypasses
+      // mailto-action=submit oddities across browsers and gives us a guard
+      // against empty-email submits that the original handler silently let
+      // through (the form had required but e.preventDefault fired before
+      // native validation).
       document.getElementById('early-form').addEventListener('submit', function(e) {
         e.preventDefault();
         var f = e.target;
-        var email = encodeURIComponent(f.email.value || '');
-        var company = encodeURIComponent(f.company.value || '');
-        var size = encodeURIComponent(f.team_size.value || '');
-        var worry = encodeURIComponent(f.worry.value || '');
+        var emailInput = f.email;
+        if (!emailInput.value || !emailInput.checkValidity()) {
+          emailInput.focus();
+          emailInput.reportValidity();
+          return;
+        }
+        var company = f.company.value || '';
+        var size = f.team_size.value || '';
+        var worry = f.worry.value || '';
         var subject = encodeURIComponent('ModuleWarden early-access request');
-        var body = encodeURIComponent('Email: ' + decodeURIComponent(email) + '\nCompany: ' + decodeURIComponent(company) + '\nTeam size: ' + decodeURIComponent(size) + '\n\nBiggest npm security worry:\n' + decodeURIComponent(worry));
+        var body = encodeURIComponent(
+          'Email: ' + emailInput.value +
+          '\nCompany: ' + company +
+          '\nTeam size: ' + size +
+          '\n\nBiggest npm security worry:\n' + worry
+        );
         window.location.href = 'mailto:hello@modulewarden.com?subject=' + subject + '&body=' + body;
       });
     </script>
@@ -817,10 +834,9 @@
       </div>
       <div class="flex items-center gap-6 text-sm text-slate-500">
         <a href="https://github.com/apetersson/ModuleWarden" class="hover:text-slate-300 transition">GitHub</a>
-        <a href="#" class="hover:text-slate-300 transition">Docs</a>
-        <a href="#" class="hover:text-slate-300 transition">Status</a>
-        <a href="#" class="hover:text-slate-300 transition">Privacy</a>
-        <a href="#" class="hover:text-slate-300 transition">Terms</a>
+        <a href="#eval" class="hover:text-slate-300 transition">Eval matrix</a>
+        <a href="mailto:hello@modulewarden.com" class="hover:text-slate-300 transition">Contact</a>
+        <a href="privacy.html" class="hover:text-slate-300 transition">Privacy</a>
       </div>
     </div>
     <div class="mt-6 pt-6 border-t border-slate-800/60 text-xs text-slate-600 text-center">
