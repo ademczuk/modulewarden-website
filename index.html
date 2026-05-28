@@ -9,7 +9,10 @@
   <meta property="og:description" content="Self-hosted npm registry proxy. Deterministic policy gate. Quarantine plus audit memos. Underwriting-grade evidence for cyber insurance." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://modulewarden.com" />
+  <meta property="og:image" content="https://ademczuk.github.io/modulewarden-website/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ademczuk.github.io/modulewarden-website/og-card.png" />
+  <link rel="canonical" href="https://modulewarden.com" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23064e3b'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%2334d399' font-family='monospace' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +55,7 @@
 
 <!-- hackathon banner -->
 <div class="bg-amber-500/10 border-b border-amber-500/20 text-center py-2 text-xs text-amber-200">
-  <span class="mono">Built at Zero-One Hack Vienna 2026</span> · UNIQA Insurance track · <a href="https://github.com/ademczuk/apiary" class="underline hover:text-amber-100">public hackathon repo</a>
+  <span class="mono">Built at Zero-One Hack Vienna 2026</span> · UNIQA Insurance track · <a href="https://github.com/apetersson/ModuleWarden" class="underline hover:text-amber-100">canonical repo</a> · <a href="https://github.com/apetersson/ModuleWarden/pull/1" class="underline hover:text-amber-100">finetune PR</a>
 </div>
 
 <!-- nav -->
@@ -70,7 +73,7 @@
       <a href="#integrations" class="text-slate-400 hover:text-slate-100 transition">Integrations</a>
       <a href="#pricing" class="text-slate-400 hover:text-slate-100 transition">Pricing</a>
       <a href="#faq" class="text-slate-400 hover:text-slate-100 transition">FAQ</a>
-      <a href="https://github.com/ademczuk/apiary" class="text-slate-400 hover:text-slate-100 transition">GitHub</a>
+      <a href="https://github.com/apetersson/ModuleWarden" class="text-slate-400 hover:text-slate-100 transition">GitHub</a>
     </div>
     <a href="#early" class="bg-emerald-500 text-slate-950 px-4 py-2 rounded-md font-semibold text-sm hover:bg-emerald-400 transition">Get early access</a>
   </div>
@@ -98,7 +101,7 @@
       </a>
       <a href="#demo" class="w-full sm:w-auto px-6 py-3 rounded-md border border-slate-700 text-slate-200 hover:border-slate-500 hover:bg-slate-900/50 transition flex items-center justify-center gap-2">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6 4l10 6-10 6V4z"/></svg>
-        Watch the 90-second demo
+        See the audit flow
       </a>
     </div>
     <p class="text-xs text-slate-600 mt-5">Free for OSS. No credit card. Self-host or cloud.</p>
@@ -109,11 +112,11 @@
         <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
         <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
         <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
-        <span class="ml-3 text-xs text-slate-500 mono">~/your-repo · npm install · routed through apiary</span>
+        <span class="ml-3 text-xs text-slate-500 mono">~/your-repo · npm install · routed through ModuleWarden</span>
       </div>
       <div class="p-6 mono text-sm space-y-1.5 leading-relaxed">
         <div><span class="text-emerald-400">$</span> <span class="text-slate-100">npm install postmark-mcp@1.0.16</span></div>
-        <div class="text-slate-500">  &gt; routing through apiary registry...</div>
+        <div class="text-slate-500">  &gt; routing through ModuleWarden gate...</div>
         <div class="text-slate-500">  &gt; policy gate evaluating...</div>
         <div class="text-red-400">  ✗ release-age: 3 days (policy: &ge;14)</div>
         <div class="text-red-400">  ✗ install-script: postinstall calls https://api.attacker.tld/r</div>
@@ -125,6 +128,49 @@
     </div>
 
     <p class="text-xs text-slate-600 mt-5 mono">Real incident, real package. <a href="https://snyk.io/blog/malicious-mcp-server-on-npm-postmark-mcp-harvests-emails/" class="text-slate-500 underline hover:text-slate-400">postmark-mcp v1.0.16, Sep 2025</a> · ~1,500 weekly downloads at time of compromise.</p>
+  </div>
+</section>
+
+<!-- GHSA case gallery -->
+<section class="border-t border-slate-800/60 py-16 bg-slate-900/20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-10">
+      <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">Real incidents the gate catches</h2>
+      <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Not one famous postinstall. Three years of pattern.</h3>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs font-bold mono text-red-400">CVE-2018-16487</span>
+          <span class="text-xs text-slate-600">·</span>
+          <span class="text-xs text-slate-500">Nov 2018</span>
+        </div>
+        <h4 class="font-semibold text-base mb-2">event-stream + flatmap-stream</h4>
+        <p class="text-sm text-slate-400 leading-relaxed mb-4">A retired maintainer handed off event-stream to a new contributor. New contributor published flatmap-stream as a dependency, then injected code targeting Copay's bitcoin wallet. 8 million weekly downloads in scope.</p>
+        <p class="text-xs mono text-emerald-300">Gated by: install-script + source-match + release-age</p>
+      </div>
+      <div class="bg-slate-900/40 border border-emerald-500/30 rounded-xl p-6 hover:border-emerald-500/50 transition">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs font-bold mono text-red-400">GHSA-postmark-mcp</span>
+          <span class="text-xs text-slate-600">·</span>
+          <span class="text-xs text-slate-500">Sep 2025</span>
+        </div>
+        <h4 class="font-semibold text-base mb-2">postmark-mcp v1.0.16</h4>
+        <p class="text-sm text-slate-400 leading-relaxed mb-4">MCP server for Postmark email had a one-line BCC added that copied every email handled by the server to the maintainer's personal address. ~1,500 weekly downloads, mostly autonomous AI agents.</p>
+        <p class="text-xs mono text-emerald-300">Gated by: release-age + source-diff + LLM audit</p>
+      </div>
+      <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs font-bold mono text-red-400">Shai-Hulud</span>
+          <span class="text-xs text-slate-600">·</span>
+          <span class="text-xs text-slate-500">Nov 2025</span>
+        </div>
+        <h4 class="font-semibold text-base mb-2">Self-spreading npm worm</h4>
+        <p class="text-sm text-slate-400 leading-relaxed mb-4">795 packages compromised in a single wave. Worm harvested npm tokens from infected machines, then republished trojaned versions of each maintainer's packages. Industry response time: ~36 hours.</p>
+        <p class="text-xs mono text-emerald-300">Gated by: install-script + release-age (held the wave during initial publish window)</p>
+      </div>
+    </div>
+    <p class="text-xs text-slate-600 mt-6 text-center">All three cases were reproducible against the ModuleWarden gate at the time of compromise. Full evidence memos in the <a href="https://github.com/apetersson/ModuleWarden/tree/main/finetune/corpus" class="underline hover:text-slate-400">corpus directory</a>.</p>
   </div>
 </section>
 
@@ -202,6 +248,9 @@
       <p class="text-lg text-slate-400 leading-relaxed">
         Cyber underwriters need attestable controls, not screenshots of a dashboard. ModuleWarden produces a Control Evidence Memo for every policy decision. Reviewable, reproducible, and ready for your insurer's compliance team.
       </p>
+      <p class="mt-4 text-sm text-emerald-200/80 leading-relaxed">
+        Built with the UNIQA cyber-policy underwriter workflow in mind: a single artifact answers the supply-chain questionnaire, attests to the control on policy-bind day, and supplies post-incident forensics if the worst happens.
+      </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-4 mt-14">
@@ -227,6 +276,60 @@
         <p class="text-sm text-slate-400 leading-relaxed">Every policy decision generates a Control Evidence Memo (Markdown, machine-readable JSON, audit log). Drop it into your SOC 2 or ISO 27001 evidence pack. Same artifact serves the auditor and the underwriter.</p>
       </div>
     </div>
+
+    <details class="mt-10 bg-slate-900/60 border border-emerald-500/20 rounded-xl p-6 group">
+      <summary class="flex items-center justify-between font-semibold cursor-pointer">
+        <span class="text-emerald-300">Sample Control Evidence Memo (aud_7f3e2.md)</span>
+        <svg class="w-5 h-5 text-emerald-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+<pre class="mt-4 mono text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-md p-5 overflow-x-auto">
+<span class="text-slate-500"># Control Evidence Memo: postmark-mcp@1.0.16</span>
+<span class="text-slate-500">audit_id: aud_7f3e2</span>
+<span class="text-slate-500">schema_version: modulewarden.audit_report.v1</span>
+<span class="text-slate-500">timestamp: 2025-09-27T14:22:11Z</span>
+<span class="text-slate-500">requested_by: ci@acme.example  org: acme-eng</span>
+
+<span class="text-emerald-300">VERDICT: block</span>
+<span class="text-emerald-300">CONFIDENCE: high</span>
+<span class="text-emerald-300">RISK LEVEL: critical</span>
+
+<span class="text-slate-500">## Primary findings</span>
+
+<span class="text-red-300">- category: credential_or_env_access</span>
+<span class="text-slate-300">  evidence_ref: tarball/dist/cli.js#L42-L58
+  detail: postinstall script reads process.env keys matching
+          /AWS|SLACK|GITHUB|NPM/ and POSTs JSON to api.attacker.tld</span>
+
+<span class="text-red-300">- category: network_access_added</span>
+<span class="text-slate-300">  evidence_ref: tarball/dist/cli.js#L60
+  detail: outbound https.request to non-allowlisted host first
+          introduced at v1.0.16 (not present in v1.0.12)</span>
+
+<span class="text-red-300">- category: lifecycle_script_added</span>
+<span class="text-slate-300">  evidence_ref: package.json#scripts.postinstall
+  detail: postinstall hook added between v1.0.12 and v1.0.16</span>
+
+<span class="text-slate-500">## Deterministic policy gates fired</span>
+
+<span class="text-slate-300">  release_age: FAIL (3 days, policy &ge;14)
+  install_scripts: FAIL (postinstall added)
+  source_match: FAIL (repository.url absent)
+  sri_checksum: PASS
+  allowlist: NOT_PRESENT</span>
+
+<span class="text-slate-500">## Recommended developer action</span>
+
+<span class="text-emerald-300">  Pin postmark-mcp@1.0.12 (last allow-listed).
+  Open issue with maintainer to verify v1.0.16 provenance.</span>
+
+<span class="text-slate-500">## Output integrity</span>
+
+<span class="text-slate-300">  signature: ed25519:5f2b8a9e...
+  evidence_index: 4 of 4 cited findings resolve to artifact paths
+  generated_by: modulewarden-audit-runner v0.4.0 sha=abc123</span>
+</pre>
+      <p class="mt-4 text-xs text-slate-500">Sibling files in the same commit: <span class="mono">aud_7f3e2.json</span> (machine-readable), <span class="mono">policy.json</span> (the rule set that fired), and the underlying SHA-pinned tarball hashes. SOC 2 evidence auditors and cyber-policy underwriters consume the same artifact.</p>
+    </details>
   </div>
 </section>
 
@@ -237,7 +340,7 @@
       <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">How it works</h2>
       <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">A policy gate. Not another scanner.</h3>
       <p class="text-lg text-slate-400 leading-relaxed">
-        Apiary runs between your package manager and the registry. Every <span class="mono text-slate-300">npm install</span> routes through the gate. Deterministic rules fire first, an optional LLM audit runs second. Your CI either gets the package or gets a quarantine notice with a clear, auditable reason.
+        ModuleWarden runs between your package manager and the registry. Every <span class="mono text-slate-300">npm install</span> routes through the gate. Deterministic rules fire first, an optional LLM audit runs second. Your CI either gets the package or gets a quarantine notice with a clear, auditable reason.
       </p>
     </div>
 
@@ -289,7 +392,7 @@
        │  npm install foo@2.1.0
        ▼
   ┌──────────────────────────┐
-  │  <span class="text-emerald-400">Apiary Registry Proxy</span>   │
+  │  <span class="text-emerald-400">ModuleWarden Proxy</span>      │
   │  (Verdaccio + policy)    │
   └────────────┬─────────────┘
                │
@@ -317,6 +420,63 @@
    <span class="text-slate-400">tarball / cache / developer</span>
 </pre>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4-arm eval matrix -->
+<section id="eval" class="py-24 border-t border-slate-800/60">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">How we measure accuracy</h2>
+      <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Four arms. One held-out test set.</h3>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        The LLM audit only ships when the numbers justify it. Every claim we make about catch rate or false-positive rate is reproducible against the four-arm test bench described in <a href="https://github.com/apetersson/ModuleWarden/blob/main/finetune/README.md" class="underline text-emerald-300 hover:text-emerald-200">finetune/README.md</a>. Same packages, same prompts, same scoring rubric.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-10">
+      <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="text-xs font-bold mono text-slate-500">ARM A</span>
+          <span class="text-sm font-semibold text-slate-200">Base model, one-shot</span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed">Vanilla Qwen3.6-27B receives the audit dossier and emits a single verdict. Sets the floor: what does a smart model get right with zero training and no tools?</p>
+      </div>
+      <div class="bg-slate-900/40 border border-emerald-500/30 rounded-xl p-6">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="text-xs font-bold mono text-emerald-300">ARM B</span>
+          <span class="text-sm font-semibold text-emerald-100">Fine-tuned model, one-shot</span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed">Same architecture, fine-tuned on the GHSA + synthetic corpus. Measures: does training on real incident pairs actually help, or are we just adding latency for nothing?</p>
+      </div>
+      <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="text-xs font-bold mono text-slate-500">ARM C</span>
+          <span class="text-sm font-semibold text-slate-200">Base model, agentic harness</span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed">Base model wrapped in the audit-runner: file-read tools, shell, network capture. Measures: do tools alone close the gap, or is training still necessary?</p>
+      </div>
+      <div class="bg-slate-900/40 border border-emerald-500/30 rounded-xl p-6">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="text-xs font-bold mono text-emerald-300">ARM D</span>
+          <span class="text-sm font-semibold text-emerald-100">Fine-tuned + agentic, seeded one-shot</span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed">The shipping configuration. Fine-tuned model gets the arm-B one-shot verdict as a starting prior, then the harness verifies via tool-use. Measures the production stack.</p>
+      </div>
+    </div>
+
+    <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-6">
+      <div class="text-xs text-slate-500 uppercase tracking-widest mb-4">Metrics tracked, per arm, per package</div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">Malicious catch rate (recall on incident_replay)</span></div>
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">False quarantine + block rate on benign neighbors</span></div>
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">Precision at recall 90 (underwriter operating point)</span></div>
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">Evidence citation accuracy (claims to artifacts)</span></div>
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">JSON schema validity (against audit_report.v1)</span></div>
+        <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">Tool-call count + total runtime</span></div>
+      </div>
+      <p class="text-xs text-slate-500 mt-5 leading-relaxed">Floor baselines we have to beat: GPT-4 zero-shot reported 97 percent precision on the npm malware task (<a href="https://arxiv.org/abs/2403.12196" class="underline hover:text-slate-400">arXiv:2403.12196</a>); fine-tuned DeepSeek-Coder-6.7B reported 87 percent accuracy on the same set. If our fine-tune underperforms 87, we have a data or training-config problem and we will say so.</p>
     </div>
   </div>
 </section>
@@ -354,7 +514,7 @@
           <div class="text-4xl">🐝</div>
           <div>
             <h4 class="font-bold text-lg mb-2">Pairs with Bumblebee</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source endpoint scanner feeds Apiary your installed-package inventory from every developer laptop and CI runner. Baseline risk profile, org-wide, in one shot. The two tools are built for each other.</p>
+            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source endpoint scanner feeds ModuleWarden your installed-package inventory from every developer laptop and CI runner. Baseline risk profile, org-wide, in one shot. The two tools are built for each other.</p>
           </div>
         </div>
       </div>
@@ -372,8 +532,9 @@
     <div class="mt-10 bg-slate-900/40 border border-slate-800 rounded-xl p-8">
       <div class="text-xs text-slate-500 uppercase tracking-widest mb-4">Install in 30 seconds</div>
 <pre class="mono text-sm text-slate-300 leading-relaxed bg-slate-950/50 border border-slate-800 rounded-md p-5 overflow-x-auto">
-<span class="text-slate-500"># self-host the gate</span>
-<span class="text-emerald-400">$</span> docker run -p 4873:4873 -v mw-data:/data ghcr.io/ademczuk/apiary:latest
+<span class="text-slate-500"># clone + start the gate (self-host)</span>
+<span class="text-emerald-400">$</span> git clone https://github.com/apetersson/ModuleWarden &amp;&amp; cd ModuleWarden
+<span class="text-emerald-400">$</span> docker compose up -d gateway
 
 <span class="text-slate-500"># point npm at it</span>
 <span class="text-emerald-400">$</span> npm config set registry http://localhost:4873/
@@ -408,7 +569,7 @@
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> CLI + REST API</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> GitHub-issue support</li>
         </ul>
-        <a href="https://github.com/ademczuk/apiary" class="block text-center w-full py-2.5 rounded-md border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition font-medium text-sm">Start on GitHub</a>
+        <a href="https://github.com/apetersson/ModuleWarden" class="block text-center w-full py-2.5 rounded-md border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition font-medium text-sm">Start on GitHub</a>
       </div>
 
       <div class="bg-slate-900 border-2 border-emerald-500 rounded-xl p-8 relative flex flex-col shadow-2xl shadow-emerald-500/10">
@@ -464,7 +625,7 @@
           <span>Is this insurable as a cyber-policy control?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Yes. Apiary produces Control Evidence Memos (markdown plus JSON plus audit log) compatible with SOC 2, ISO 27001, and cyber-insurance underwriting questionnaires. Talk to your insurer about premium tier eligibility.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">Yes. ModuleWarden produces Control Evidence Memos (markdown plus JSON plus audit log) compatible with SOC 2, ISO 27001, and cyber-insurance underwriting questionnaires. Talk to your insurer about premium tier eligibility.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -472,7 +633,7 @@
           <span>Does it replace my SCA scanner (Snyk, Dependabot)?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. Apiary is a pre-install gate, your SCA runs post-install. Different positions in the stack, both useful, they stack.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. ModuleWarden is a pre-install gate, your SCA runs post-install. Different positions in the stack, both useful, they stack.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -488,7 +649,7 @@
           <span>Is this just another SCA tool?</span>
           <svg class="w-5 h-5 text-slate-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </summary>
-        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. SCA tools tell you which already-installed packages have known CVEs. Apiary gates each install request before it executes. Different position in the stack, different problem solved. Use both.</p>
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed">No. SCA tools tell you which already-installed packages have known CVEs. ModuleWarden gates each install request before it executes. Different position in the stack, different problem solved. Use both.</p>
       </details>
 
       <details class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 group">
@@ -540,8 +701,8 @@
     <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Get early access</h2>
     <p class="text-slate-400 mb-10 leading-relaxed">We are rolling out to design partners now. Tell us about your stack and we will be in touch within 24 hours.</p>
 
-    <!-- IMPORTANT: replace action= with your Formspree, Buttondown, or Cloudflare Worker endpoint before going live -->
-    <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST" class="space-y-3 text-left">
+    <form id="early-form" action="mailto:hello@modulewarden.com" method="POST" enctype="text/plain" class="space-y-3 text-left">
+      <input type="hidden" name="_subject" value="ModuleWarden early-access request" />
       <div>
         <label class="block text-xs text-slate-500 mb-1.5 uppercase tracking-wider">Work email</label>
         <input type="email" name="email" required class="w-full bg-slate-900/80 border border-slate-700 rounded-md px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition" placeholder="you@yourcompany.com" />
@@ -565,7 +726,21 @@
       </div>
       <button type="submit" class="w-full bg-emerald-500 text-slate-950 py-3 rounded-md font-semibold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">Request access</button>
     </form>
-    <p class="text-xs text-slate-600 mt-4">No credit card. No spam. We respond within one business day.</p>
+    <p class="text-xs text-slate-600 mt-4">No credit card. No spam. We respond within one business day. Prefer email directly? <a href="mailto:hello@modulewarden.com?subject=Early%20access%20request" class="underline hover:text-slate-400">hello@modulewarden.com</a></p>
+    <script>
+      // Open a prefilled mailto in the user's email client, bypassing the spotty browser handling of form action=mailto.
+      document.getElementById('early-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var f = e.target;
+        var email = encodeURIComponent(f.email.value || '');
+        var company = encodeURIComponent(f.company.value || '');
+        var size = encodeURIComponent(f.team_size.value || '');
+        var worry = encodeURIComponent(f.worry.value || '');
+        var subject = encodeURIComponent('ModuleWarden early-access request');
+        var body = encodeURIComponent('Email: ' + decodeURIComponent(email) + '\nCompany: ' + decodeURIComponent(company) + '\nTeam size: ' + decodeURIComponent(size) + '\n\nBiggest npm security worry:\n' + decodeURIComponent(worry));
+        window.location.href = 'mailto:hello@modulewarden.com?subject=' + subject + '&body=' + body;
+      });
+    </script>
   </div>
 </section>
 
@@ -580,7 +755,7 @@
         <span class="text-sm text-slate-500">ModuleWarden · 2026 · Built in Vienna 🇦🇹</span>
       </div>
       <div class="flex items-center gap-6 text-sm text-slate-500">
-        <a href="https://github.com/ademczuk/apiary" class="hover:text-slate-300 transition">GitHub</a>
+        <a href="https://github.com/apetersson/ModuleWarden" class="hover:text-slate-300 transition">GitHub</a>
         <a href="#" class="hover:text-slate-300 transition">Docs</a>
         <a href="#" class="hover:text-slate-300 transition">Status</a>
         <a href="#" class="hover:text-slate-300 transition">Privacy</a>
