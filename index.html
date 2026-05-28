@@ -534,10 +534,10 @@
 <pre class="mono text-sm text-slate-300 leading-relaxed bg-slate-950/50 border border-slate-800 rounded-md p-5 overflow-x-auto">
 <span class="text-slate-500"># clone + start the gate (self-host)</span>
 <span class="text-emerald-400">$</span> git clone https://github.com/apetersson/ModuleWarden &amp;&amp; cd ModuleWarden
-<span class="text-emerald-400">$</span> docker compose up -d gateway
+<span class="text-emerald-400">$</span> docker compose up -d
 
-<span class="text-slate-500"># point npm at it</span>
-<span class="text-emerald-400">$</span> npm config set registry http://localhost:4873/
+<span class="text-slate-500"># point npm at it (default API port 8080)</span>
+<span class="text-emerald-400">$</span> npm config set registry http://localhost:8080/
 
 <span class="text-slate-500"># or cloud (early access)</span>
 <span class="text-emerald-400">$</span> npm config set registry https://gate.modulewarden.com/your-org/
