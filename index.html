@@ -140,6 +140,74 @@
   </div>
 </section>
 
+<!-- the real supply chain: systemic-risk reveal -->
+<section class="relative overflow-hidden border-t border-slate-800/60">
+  <video
+    id="sc-video"
+    class="absolute inset-0 w-full h-full object-cover opacity-60"
+    muted loop playsinline preload="none"
+    poster="media/supplychain-poster.jpg"
+    aria-hidden="true"
+  >
+    <source src="media/supplychain-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/70 to-slate-950"></div>
+
+  <div class="relative max-w-4xl mx-auto px-6 py-28 md:py-36 text-center">
+    <p class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-5">The real supply chain</p>
+    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-7">
+      Most people picture <span class="text-slate-500">containers.</span><br />
+      Your supply chain is <span class="gradient-text">code.</span>
+    </h2>
+    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+      Say "supply chain attack" and people see ports, trucks, cargo. Every one of those systems runs on software. And roughly <span class="text-emerald-300 font-semibold">80 open-source packages</span> sit underneath about <span class="text-emerald-300 font-semibold">90%</span> of it. Compromise one and it does not stop at a single repo. It cascades to every project that ever pulled it in.
+    </p>
+
+    <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mt-12">
+      <div>
+        <div class="text-3xl md:text-5xl font-extrabold gradient-text mb-1">~80</div>
+        <p class="text-xs text-slate-400 uppercase tracking-wider">packages everything leans on</p>
+      </div>
+      <div>
+        <div class="text-3xl md:text-5xl font-extrabold gradient-text mb-1">~90%</div>
+        <p class="text-xs text-slate-400 uppercase tracking-wider">of software depends on them</p>
+      </div>
+      <div>
+        <div class="text-3xl md:text-5xl font-extrabold text-red-400 mb-1">1</div>
+        <p class="text-xs text-slate-400 uppercase tracking-wider">compromise cascades to all of it</p>
+      </div>
+    </div>
+
+    <p class="text-sm text-slate-400 mt-12 max-w-xl mx-auto">
+      That blast radius is the surface ModuleWarden gates, before a single install script runs.
+    </p>
+  </div>
+</section>
+<script>
+  // Lazy-play the background cascade only when the section is on screen; honor reduced motion.
+  (function () {
+    var v = document.getElementById("sc-video");
+    if (!v) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { v.play().catch(function () {}); }
+            else { v.pause(); }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(v);
+    } else {
+      v.setAttribute("autoplay", "");
+      v.play().catch(function () {});
+    }
+  })();
+</script>
+
 <!-- GHSA case gallery -->
 <section class="border-t border-slate-800/60 py-16 bg-slate-900/20">
   <div class="max-w-6xl mx-auto px-6">

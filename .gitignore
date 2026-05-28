@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # pages workflow artifacts
 .cache/
+
+# grok-imagine intermediates (not served)
+media/_*.png
+media/supplychain-cascade.mp4
