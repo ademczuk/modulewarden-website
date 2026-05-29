@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ModuleWarden · the dependency firewall for cyber-insurable software</title>
+  <title>ModuleWarden · forecast and gate your software supply chain</title>
   <meta name="description" content="Stop trusting your dependencies. Start gating them. ModuleWarden is a self-hosted npm registry proxy with deterministic policy rules, quarantine, audit memos, and a conversational underwriter assistant." />
   <meta property="og:title" content="ModuleWarden · the dependency firewall for cyber-insurable software" />
   <meta property="og:description" content="Self-hosted npm registry proxy plus conversational underwriter assistant. Deterministic policy gate, audit memos, control-class credit signal for cyber underwriters." />
@@ -188,13 +188,13 @@
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
       Built for the post-postmark-mcp era
     </div>
-    <p class="text-base md:text-lg text-emerald-300 font-medium mb-4 tracking-tight">The dependency firewall for cyber-insurable software.</p>
+    <p class="text-base md:text-lg text-emerald-300 font-medium mb-4 tracking-tight">The decision layer for your software supply chain.</p>
     <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-7 leading-[1.05]">
       Stop trusting your<br/>dependencies.
       <span class="gradient-text">Start gating them.</span>
     </h1>
     <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-      ModuleWarden is a self-hosted npm registry proxy. Deterministic rules gate every install. Quarantined releases land alongside a git-committed audit memo. Your insurer gets evidence, your developers keep their velocity.
+      ModuleWarden forecasts the supply-chain attack risk of every package your team brings in, the moment it is submitted. A deterministic gate acts on the forecast (allow, quarantine, or block) and every decision lands with a git-committed evidence memo. Careless dependency or deliberate insider, you see the risk before it ships.
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
       <a href="#early" class="w-full sm:w-auto bg-emerald-500 text-slate-950 px-6 py-3 rounded-md font-semibold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
@@ -714,6 +714,30 @@
         <div class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">·</span><span class="text-slate-300">Tool-call count + total runtime</span></div>
       </div>
       <p class="text-xs text-slate-500 mt-5 leading-relaxed">Floor baselines we have to beat: GPT-4 zero-shot reported 97 percent precision on the npm malware task (<a href="https://arxiv.org/abs/2403.12196" class="underline hover:text-slate-400">arXiv:2403.12196</a>); fine-tuned DeepSeek-Coder-6.7B reported 87 percent accuracy on the same set. If our fine-tune underperforms 87, we have a data or training-config problem and we will say so.</p>
+    </div>
+
+    <!-- static risk classifier: measured floor, lift, ceiling -->
+    <div class="mt-4 bg-slate-900/40 border border-slate-800 rounded-xl p-6">
+      <div class="text-xs text-slate-500 uppercase tracking-widest mb-4">Static risk classifier (measured on our own GHSA corpus, CPU, held-out)</div>
+      <p class="text-sm text-slate-400 leading-relaxed mb-5">We trained a static feature classifier and measured it on three real splits. We report the floor and the ceiling, not a borrowed number. The point: a single static score is the wrong tool for the hard case, which is exactly why the deterministic gate decides and the model narrates.</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-lg border border-slate-800 bg-slate-950/40 p-4">
+          <div class="text-3xl font-extrabold text-slate-300 mb-1 mono">0.54</div>
+          <div class="text-xs font-semibold text-slate-300 mb-1">Vulnerability in one version, seen alone</div>
+          <p class="text-xs text-slate-500 leading-relaxed">AUROC, near random. The vulnerable and patched releases are the same package, so the signal is not in what the code can do. It is in what changed.</p>
+        </div>
+        <div class="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
+          <div class="text-3xl font-extrabold text-emerald-300 mb-1 mono">0.60</div>
+          <div class="text-xs font-semibold text-emerald-100 mb-1">Same-package version delta</div>
+          <p class="text-xs text-slate-400 leading-relaxed">AUROC. Differencing the two versions lifts the signal above the cold floor, so the delta thesis holds. Static features are too coarse to carry it far. A code embedding of the change is the next build.</p>
+        </div>
+        <div class="rounded-lg border border-slate-800 bg-slate-950/40 p-4">
+          <div class="text-3xl font-extrabold text-slate-300 mb-1 mono">0.98</div>
+          <div class="text-xs font-semibold text-slate-300 mb-1">Standalone malware vs clean libraries</div>
+          <p class="text-xs text-slate-500 leading-relaxed">AUROC, 0.98 precision at 0.93 recall. Real, but driven mostly by package size (droppers are tiny). It catches obvious junk, not malware injected into existing code.</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mt-5 leading-relaxed">Reproducible from the corpus and the scripts in <a href="https://github.com/apetersson/ModuleWarden/tree/main/finetune" class="underline text-emerald-300 hover:text-emerald-200">finetune/</a>. The deterministic gate is the verdict authority; the static forecast is a weak prior today, and the embedding of the version delta is where a real probabilistic layer comes from.</p>
     </div>
   </div>
 </section>
