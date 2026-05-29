@@ -561,7 +561,7 @@
 
 <span class="text-slate-500">## Output integrity</span>
 
-<span class="text-slate-300">  signature: ed25519:5f2b8a9e...
+<span class="text-slate-300">  signature: (ed25519 memo signing is on the roadmap)
   evidence_index: 4 of 4 cited findings resolve to artifact paths
   generated_by: modulewarden-audit-runner v0.4.0 sha=abc123</span>
 </pre>
@@ -668,7 +668,7 @@
       <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">How we measure accuracy</h2>
       <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Four arms. One held-out test set.</h3>
       <p class="text-lg text-slate-400 leading-relaxed">
-        The LLM audit only ships when the numbers justify it. Every claim we make about catch rate or false-positive rate is reproducible against the four-arm test bench described in <a href="https://github.com/apetersson/ModuleWarden/blob/main/finetune/README.md" class="underline text-emerald-300 hover:text-emerald-200">finetune/README.md</a>. Same packages, same prompts, same scoring rubric.
+        The LLM audit only ships when the numbers justify it. The four-arm bench below is the measurement design, reproducible against <a href="https://github.com/apetersson/ModuleWarden/blob/main/finetune/README.md" class="underline text-emerald-300 hover:text-emerald-200">finetune/README.md</a>. So far we have run arms A and B on a small model (Qwen2.5-Coder QLoRA, 386 real GHSA records): base 0 percent to fine-tuned 73.9 percent verdict reproduction on a held-out test split, with 0 of 5 block-recall. The deterministic gate, not the model, catches the severe cases today. Arms C and D and the 27B are the scale-up.
       </p>
     </div>
 
@@ -678,7 +678,7 @@
           <span class="text-xs font-bold mono text-slate-500">ARM A</span>
           <span class="text-sm font-semibold text-slate-200">Base model, one-shot</span>
         </div>
-        <p class="text-sm text-slate-400 leading-relaxed">Vanilla Qwen3.6-27B receives the audit dossier and emits a single verdict. Sets the floor: what does a smart model get right with zero training and no tools?</p>
+        <p class="text-sm text-slate-400 leading-relaxed">Vanilla base model (Qwen2.5-Coder today; Qwen3.6-27B is the scale-up target, not yet trained) receives the audit dossier and emits a single verdict. Sets the floor: what does a model get right with zero training and no tools?</p>
       </div>
       <div class="bg-slate-900/40 border border-emerald-500/30 rounded-xl p-6">
         <div class="flex items-baseline gap-3 mb-2">
@@ -810,8 +810,8 @@
         <div class="flex items-start gap-4">
           <div class="text-4xl">📊</div>
           <div>
-            <h4 class="font-bold text-lg mb-2">Streams to your SIEM</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Splunk, Datadog, Sumo, Elastic, raw webhooks. Every decision, every approval, every override. Compliance auditors get a real trail. Security ops get real signal.</p>
+            <h4 class="font-bold text-lg mb-2">A real audit trail</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Every decision, approval, and override is persisted as a structured, queryable record. Compliance auditors get a real trail and security ops get real signal. SIEM and webhook export (Splunk, Datadog, Sumo, Elastic) is on the roadmap.</p>
           </div>
         </div>
       </div>
@@ -872,9 +872,9 @@
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Everything in Open Source</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Unlimited audits</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Private rule packs + custom rubric</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Slack + PagerDuty + webhook alerts</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> SIEM export (Splunk, Datadog, Sumo)</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> SSO (SAML, OIDC, Google Workspace)</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Webhook alerts (Slack, PagerDuty on the roadmap)</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Structured audit-log export (SIEM connectors on the roadmap)</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> SSO (SAML, OIDC, Google Workspace) on the roadmap</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Email + chat support</li>
         </ul>
         <a href="#early" class="block text-center w-full py-2.5 rounded-md bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">Get early access</a>
