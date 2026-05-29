@@ -121,7 +121,7 @@
         class="w-full block"
         autoplay muted loop playsinline preload="auto"
         poster="media/hero-poster.jpg"
-        aria-label="ModuleWarden gating a malicious install: postmark-mcp 1.0.16 is quarantined with a git-committed audit memo and a safe fallback to 1.0.12."
+        aria-label="ModuleWarden gating a malicious install: postmark-mcp 1.0.16 is quarantined with a git-committed audit memo and a safe fallback to 1.0.15."
       >
         <source src="media/hero-promo.mp4" type="video/mp4" />
         <!-- fallback for no-video browsers: the poster still shows the gate verdict -->
@@ -447,11 +447,11 @@
 <span class="text-red-300">- category: network_access_added</span>
 <span class="text-slate-300">  evidence_ref: tarball/dist/cli.js#L60
   detail: outbound https.request to non-allowlisted host first
-          introduced at v1.0.16 (not present in v1.0.12)</span>
+          introduced at v1.0.16 (not present in v1.0.15)</span>
 
 <span class="text-red-300">- category: lifecycle_script_added</span>
 <span class="text-slate-300">  evidence_ref: package.json#scripts.postinstall
-  detail: postinstall hook added between v1.0.12 and v1.0.16</span>
+  detail: postinstall hook added between v1.0.15 and v1.0.16</span>
 
 <span class="text-slate-500">## Deterministic policy gates fired</span>
 
@@ -463,7 +463,7 @@
 
 <span class="text-slate-500">## Recommended developer action</span>
 
-<span class="text-emerald-300">  Pin postmark-mcp@1.0.12 (last allow-listed).
+<span class="text-emerald-300">  Pin postmark-mcp@1.0.15 (last allow-listed).
   Open issue with maintainer to verify v1.0.16 provenance.</span>
 
 <span class="text-slate-500">## Output integrity</span>
@@ -687,7 +687,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
       <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 text-center hover:border-slate-700 transition">
         <div class="font-bold mono text-emerald-400 text-lg mb-1">npm</div>
-        <div class="text-xs text-slate-500">drop-in registry proxy</div>
+        <div class="text-xs text-slate-500">self-hosted registry proxy</div>
       </div>
       <div class="bg-slate-900/40 border border-slate-800 rounded-lg p-5 text-center hover:border-slate-700 transition">
         <div class="font-bold mono text-emerald-400 text-lg mb-1">pnpm</div>
@@ -795,11 +795,11 @@
         <div class="text-sm text-slate-500 mb-7">100+ developers, regulated industries</div>
         <ul class="space-y-3 text-sm text-slate-300 mb-8 flex-1">
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Everything in Team</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Air-gapped deployment</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Self-hosted deployment</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Bring-your-own LLM endpoint</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Custom rule pack engineering</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> 24/7 incident response</li>
-          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> SOC 2 Type II, DPA, BAA</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Priority incident support</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Evidence packs for SOC 2 / ISO 27001 audits</li>
           <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Dedicated success manager</li>
         </ul>
         <a href="mailto:sales@modulewarden.com" class="block text-center w-full py-2.5 rounded-md border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition font-medium text-sm">Contact sales</a>
