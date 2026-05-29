@@ -52,6 +52,9 @@
     details[open] summary svg { transform: rotate(180deg); }
     summary { list-style: none; cursor: pointer; }
     summary::-webkit-details-marker { display: none; }
+    /* scroll-reveal: applied via JS so content is never hidden without JS */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); will-change: opacity, transform; }
+    .reveal.is-visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-100">
@@ -115,7 +118,7 @@
       <video
         id="hero-video"
         class="w-full block"
-        muted loop playsinline preload="metadata"
+        autoplay muted loop playsinline preload="auto"
         poster="media/hero-poster.jpg"
         aria-label="ModuleWarden gating a malicious install: postmark-mcp 1.0.16 is quarantined with a git-committed audit memo and a safe fallback to 1.0.12."
       >
@@ -124,13 +127,10 @@
       </video>
     </div>
     <script>
-      // Autoplay the hero loop, but honor prefers-reduced-motion (show the poster still instead).
+      // Autoplay the hero loop for everyone. Muted + playsinline so browser autoplay policy allows it.
       (function () {
         var v = document.getElementById("hero-video");
         if (!v) return;
-        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduce) return;
-        v.setAttribute("autoplay", "");
         var p = v.play();
         if (p && p.catch) p.catch(function () {});
       })();
@@ -141,29 +141,37 @@
 </section>
 
 <!-- the real supply chain: systemic-risk reveal -->
-<section class="relative overflow-hidden border-t border-slate-800/60">
-  <video
-    id="sc-video"
-    class="absolute inset-0 w-full h-full object-cover opacity-60"
-    muted loop playsinline preload="none"
-    poster="media/supplychain-poster.jpg"
-    aria-hidden="true"
-  >
-    <source src="media/supplychain-loop.mp4" type="video/mp4" />
-  </video>
-  <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/70 to-slate-950"></div>
+<section class="relative overflow-hidden border-t border-slate-800/60 py-24 md:py-32">
+  <div class="absolute inset-0 radial pointer-events-none"></div>
+  <div class="relative max-w-5xl mx-auto px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-5 mono">The real supply chain</p>
+      <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-7">
+        Most people picture <span class="text-slate-500">containers.</span><br />
+        Your supply chain is <span class="gradient-text">code.</span>
+      </h2>
+      <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+        Say "supply chain attack" and people see ports, trucks, cargo. Every one of those systems runs on software. And roughly <span class="text-emerald-300 font-semibold">80 open-source packages</span> sit underneath about <span class="text-emerald-300 font-semibold">90%</span> of it. Compromise one and it does not stop at a single repo. It cascades to every project that ever pulled it in.
+      </p>
+    </div>
 
-  <div class="relative max-w-4xl mx-auto px-6 py-28 md:py-36 text-center">
-    <p class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-5">The real supply chain</p>
-    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-7">
-      Most people picture <span class="text-slate-500">containers.</span><br />
-      Your supply chain is <span class="gradient-text">code.</span>
-    </h2>
-    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-      Say "supply chain attack" and people see ports, trucks, cargo. Every one of those systems runs on software. And roughly <span class="text-emerald-300 font-semibold">80 open-source packages</span> sit underneath about <span class="text-emerald-300 font-semibold">90%</span> of it. Compromise one and it does not stop at a single repo. It cascades to every project that ever pulled it in.
-    </p>
+    <!-- video showcase: the port dissolving into the dependency graph -->
+    <figure class="relative mt-14 max-w-4xl mx-auto rounded-2xl overflow-hidden border border-slate-800 glow">
+      <video
+        id="sc-video"
+        class="w-full block"
+        muted loop playsinline preload="none"
+        poster="media/ships-to-code-poster.jpg"
+        aria-label="A container shipping port dissolves into a glowing software dependency network: the real supply chain is code."
+      >
+        <source src="media/ships-to-code-web.mp4" type="video/mp4" />
+      </video>
+      <figcaption class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent px-6 pt-16 pb-5 text-center">
+        <span class="text-xs text-slate-300 mono">Every container yard and cargo lane runs on software. The packages are the supply chain now.</span>
+      </figcaption>
+    </figure>
 
-    <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mt-12">
+    <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mt-16">
       <div>
         <div class="text-3xl md:text-5xl font-extrabold gradient-text mb-1">~80</div>
         <p class="text-xs text-slate-400 uppercase tracking-wider">packages everything leans on</p>
@@ -178,18 +186,16 @@
       </div>
     </div>
 
-    <p class="text-sm text-slate-400 mt-12 max-w-xl mx-auto">
+    <p class="text-sm text-slate-400 mt-12 max-w-xl mx-auto text-center">
       That blast radius is the surface ModuleWarden gates, before a single install script runs.
     </p>
   </div>
 </section>
 <script>
-  // Lazy-play the background cascade only when the section is on screen; honor reduced motion.
+  // Lazy-play the background reveal only when the section is on screen (defers the load).
   (function () {
     var v = document.getElementById("sc-video");
     if (!v) return;
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(
         function (entries) {
@@ -650,8 +656,8 @@
         <div class="flex items-start gap-4">
           <div class="text-4xl">🐝</div>
           <div>
-            <h4 class="font-bold text-lg mb-2">Pairs with Bumblebee</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source endpoint scanner feeds ModuleWarden your installed-package inventory from every developer laptop and CI runner. Baseline risk profile, org-wide, in one shot. The two tools are built for each other.</p>
+            <h4 class="font-bold text-lg mb-2">Designed to pair with Bumblebee</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Perplexity's open-source scanner inventories what is already installed across your laptops and CI. ModuleWarden gates what gets installed next. Opposite ends of the same timeline: Bumblebee shows your current exposure, ModuleWarden stops the next bad version. Roadmap integration: Bumblebee's per-package inventory seeds the ModuleWarden allowlist.</p>
           </div>
         </div>
       </div>
@@ -917,6 +923,26 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Scroll-reveal: fade sections up as they enter view. Class is applied by JS, so a
+  // no-JS visitor sees all content normally. A 3s fail-safe guarantees nothing stays hidden.
+  (function () {
+    if (!("IntersectionObserver" in window)) return;
+    var targets = Array.prototype.slice.call(document.querySelectorAll("section")).slice(1);
+    targets.forEach(function (el) { el.classList.add("reveal"); });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    targets.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { targets.forEach(function (el) { el.classList.add("is-visible"); }); }, 3000);
+  })();
+</script>
 
 </body>
 </html>
