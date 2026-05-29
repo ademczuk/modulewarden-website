@@ -28,3 +28,4 @@ pnpm-debug.log*
 # grok-imagine intermediates (not served)
 media/_*.png
 media/supplychain-cascade.mp4
+media/ships-to-code.mp4
