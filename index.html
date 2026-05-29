@@ -56,6 +56,96 @@
     /* scroll-reveal: applied via JS so content is never hidden without JS */
     .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); will-change: opacity, transform; }
     .reveal.is-visible { opacity: 1; transform: none; }
+    /* honeypot (#honeypot) - ported verbatim from modulewarden.com, CSS-only toggle */
+    .nav-secondary-cta { display: none; }
+    @media (min-width: 1024px) { .nav-secondary-cta { display: flex; } }
+    .hp-submitted:checked ~ .hp-form { display: none; }
+    .hp-submitted:checked ~ .hp-thanks { display: block; }
+    .hp-panel {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.86), rgba(2, 6, 23, 0.96));
+      border: 1px solid rgba(100, 116, 139, 0.32);
+      box-shadow: 0 28px 90px -58px rgba(248, 113, 113, 0.7), inset 0 1px 0 rgba(148, 163, 184, 0.08);
+    }
+    .hp-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(248, 113, 113, 0.12), transparent 34%),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: auto, 44px 44px;
+      opacity: 0.55;
+    }
+    .hp-panel > * { position: relative; }
+    .hp-field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .hp-field label {
+      color: rgb(148, 163, 184);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hp-field small { color: rgb(71, 85, 105); font-size: 0.75rem; line-height: 1.45; }
+    .hp-control {
+      width: 100%;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      border-radius: 0.5rem;
+      background: rgba(2, 6, 23, 0.64);
+      color: rgb(241, 245, 249);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    }
+    .hp-control::placeholder { color: rgb(71, 85, 105); }
+    .hp-control option { background: rgb(15, 23, 42); color: rgb(241, 245, 249); }
+    .hp-control:focus {
+      outline: none;
+      border-color: rgba(248, 113, 113, 0.8);
+      background: rgba(2, 6, 23, 0.82);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    }
+    .hp-file-input { border-style: dashed; padding: 1rem; color: rgb(148, 163, 184); cursor: pointer; }
+    .hp-file-input::file-selector-button {
+      margin-right: 0.85rem;
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      border-radius: 0.375rem;
+      background: rgba(239, 68, 68, 0.1);
+      color: rgb(252, 165, 165);
+      padding: 0.5rem 0.75rem;
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+    .hp-file-input::file-selector-button:hover {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: rgba(248, 113, 113, 0.55);
+    }
+    .hp-panel ul { list-style: disc; padding-left: 1.25rem; }
+    .hp-panel li + li { margin-top: 0.375rem; }
+    .hp-submit {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(248, 113, 113, 0.52);
+      background: linear-gradient(180deg, rgba(239, 68, 68, 0.24), rgba(127, 29, 29, 0.26));
+      color: rgb(254, 202, 202);
+      padding: 0.9rem 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
+    }
+    .hp-submit:hover { border-color: rgba(248, 113, 113, 0.78); transform: translateY(-1px); }
+    @media (max-width: 640px) {
+      .hp-panel { padding: 1.25rem; }
+      .hp-submit { line-height: 1.35; }
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-100">
@@ -83,7 +173,10 @@
       <a href="#faq" class="text-slate-400 hover:text-slate-100 transition">FAQ</a>
       <a href="https://github.com/apetersson/ModuleWarden" class="text-slate-400 hover:text-slate-100 transition">GitHub</a>
     </div>
-    <a href="#early" class="bg-emerald-500 text-slate-950 px-4 py-2 rounded-md font-semibold text-sm hover:bg-emerald-400 transition">Get early access</a>
+    <div class="flex items-center gap-3">
+      <a href="#honeypot" class="nav-secondary-cta items-center justify-center px-4 py-2 rounded-md border border-slate-700 text-slate-200 font-semibold text-sm hover:border-slate-500 hover:bg-slate-900/50 transition">Test-drive a package</a>
+      <a href="#early" class="bg-emerald-500 text-slate-950 px-4 py-2 rounded-md font-semibold text-sm hover:bg-emerald-400 transition">Get early access</a>
+    </div>
   </div>
 </nav>
 
@@ -950,6 +1043,114 @@
         window.location.href = 'mailto:hello@modulewarden.com?subject=' + subject + '&body=' + body;
       });
     </script>
+  </div>
+</section>
+
+<!-- honeypot -->
+<section id="honeypot" class="py-24 border-t border-slate-800/60 bg-slate-900/10">
+  <div class="max-w-2xl mx-auto px-6 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium mb-8">
+      <span class="w-1.5 h-1.5 rounded-full bg-red-500/60 animate-pulse"></span>
+      Pre-publish package check
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+      Do you want to test-drive ModuleWarden with your new package before publishing it?
+    </h2>
+    <p class="text-slate-400 mb-3 leading-relaxed text-lg">
+      Send us the version you are planning to ship. We will tell you what ModuleWarden thinks before npm gets involved.
+    </p>
+    <p class="text-slate-500 mb-10 leading-relaxed text-sm max-w-xl mx-auto">
+      Useful for honest maintainers. Also, apparently, for people who believe handing defenders their payload early is the clever move. We welcome all confidence levels.
+    </p>
+
+    <!-- hidden checkbox drives CSS-only toggle -->
+    <input type="checkbox" id="hp-submitted" class="hp-submitted hidden" />
+
+    <!-- active form -->
+    <div class="hp-form hp-panel rounded-xl p-8 text-left">
+      <div class="flex flex-col md:flex-row items-start justify-between gap-3 mb-6">
+        <div>
+          <p class="text-xs text-slate-500 uppercase tracking-widest">Queue status</p>
+          <p class="text-slate-300 font-semibold">Preflight requests reviewed by actual security people</p>
+        </div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950/50 border border-slate-800 text-slate-500 text-xs mono">
+          MW-PREFLIGHT
+        </div>
+      </div>
+
+      <form action="mailto:samples@modulewarden.com?subject=ModuleWarden%20pre-publish%20package%20check" method="post" enctype="text/plain" class="space-y-3">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="hp-field">
+            <label for="hp-email">Contact email</label>
+            <input id="hp-email" class="hp-control" type="email" name="email" required placeholder="maintainer@example.com" />
+            <small>Use an inbox you check. Disposable mail is fine; it sets the right tone.</small>
+          </div>
+          <div class="hp-field">
+            <label for="hp-confidence">Expected result</label>
+            <select id="hp-confidence" class="hp-control" name="confidence">
+              <option>Should pass cleanly</option>
+              <option>Might raise one boring warning</option>
+              <option>Testing a suspicious edge case</option>
+              <option>No reason, just curious</option>
+            </select>
+            <small>Pick whatever helps you sleep. The audit will use the package.</small>
+          </div>
+        </div>
+
+        <div class="hp-field">
+          <label for="hp-file">Package candidate</label>
+          <input id="hp-file" class="hp-control hp-file-input" type="file" name="payload" accept=".zip" required />
+          <small>ZIP only for now. Please include the code you were hoping would be interpreted generously.</small>
+        </div>
+
+        <div class="hp-field">
+          <label for="hp-rationale">What should we pay attention to?</label>
+          <textarea id="hp-rationale" class="hp-control resize-none" name="rationale" rows="3" placeholder="New install script, new network call, harmless obfuscation, very normal telemetry..."></textarea>
+          <small>Honest context helps. Weird context also helps, just not in the way you may prefer.</small>
+        </div>
+
+        <div class="bg-slate-950/50 border border-red-500/20 rounded-lg p-5 text-xs text-slate-500">
+          <p class="font-semibold text-red-400 mb-2">Before you submit</p>
+          <ul class="list-disc pl-5 space-y-1.5 leading-relaxed">
+            <li>We may keep samples for detection tuning. That is the whole point of sending defenders a sample.</li>
+            <li>We are happy to review benign packages, weird packages, and packages whose authors are making several decisions at once.</li>
+            <li>If this is an exploit dressed as a preview, you are still allowed to click submit. It will be educational for somebody.</li>
+            <li>Preflight feedback is not a bypass pass. It is feedback. Words have meanings. Attackers keep forgetting this.</li>
+          </ul>
+        </div>
+
+        <label for="hp-submitted" class="hp-submit text-sm text-center">
+          Request pre-publish check
+        </label>
+      </form>
+    </div>
+
+    <!-- thank-you message (visible after toggle) -->
+    <div class="hp-thanks hidden hp-panel rounded-xl p-8 text-center">
+      <div class="inline-flex items-center justify-center w-10 h-10 rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 mono font-bold mb-4">OK</div>
+      <h3 class="text-3xl font-bold text-emerald-400 mb-3">Your preflight request has been received.</h3>
+      <p class="text-slate-400 text-sm leading-relaxed max-w-xl mx-auto">
+        If this was a normal package, great. If this was an exploit submitted for a head start, thank you for choosing the funniest possible workflow.
+      </p>
+      <p class="text-xs text-slate-600 mt-6">
+        The button toggled this message locally. No upload happened. The actual lesson remains available.
+      </p>
+    </div>
+
+    <details class="mt-6 group">
+      <summary class="text-xs text-slate-600 cursor-pointer hover:text-slate-400 transition flex items-center justify-center gap-1">
+        <svg class="w-4 h-4 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        Operational disclosure
+      </summary>
+      <div class="mt-3 text-xs text-slate-600 text-left bg-slate-950/50 border border-slate-800 rounded-lg p-4 leading-relaxed">
+        <p><strong class="text-slate-400">This is a honeypot-shaped joke.</strong> The serious version is simple: maintainers can ask for help before publishing. The less serious version is that some people will read that and think they found a free preview of the alarm system.</p>
+        <p class="mt-2">The form points at <code class="mono text-slate-400">mailto:samples@modulewarden.com</code>. Your browser may open an email draft; the fake submit button only changes the message above. If you were hoping to submit an exploit for strategic advantage, strong start.</p>
+      </div>
+    </details>
+
+    <p class="mt-8 text-xs text-slate-600 mono">
+      note: submitting the test before committing the crime is not the masterstroke it feels like
+    </p>
   </div>
 </section>
 
