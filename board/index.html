@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>ModuleWarden — Backlog Board</title>
+<style>
+  :root{--bg:#0f172a;--panel:#1e293b;--panel2:#172033;--line:#334155;--txt:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .banner{background:#3b2f0b;color:#fde68a;border-bottom:1px solid #5b4708;padding:9px 20px;font-size:13px}
+  .top{display:flex;align-items:baseline;gap:12px;padding:16px 20px 4px}
+  .top h1{font-size:22px;margin:0;font-weight:800}
+  .top .sub{color:var(--muted);font-size:13px}
+  .bar{display:flex;gap:14px;color:var(--muted);font-size:12px;padding:0 20px 14px}
+  .board{display:flex;gap:14px;padding:0 20px 28px;align-items:flex-start;overflow-x:auto}
+  .col{background:var(--panel2);border:1px solid var(--line);border-radius:10px;min-width:300px;max-width:340px;flex:1}
+  .col-h{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;font-weight:700;border-bottom:1px solid var(--line)}
+  .col-h .count{background:#0b1220;color:var(--muted);border-radius:999px;padding:1px 9px;font-size:12px;font-weight:600}
+  .col-body{padding:10px;display:flex;flex-direction:column;gap:9px;max-height:78vh;overflow-y:auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:10px 11px}
+  .card.sub{border-left-color:#64748b;margin-left:10px}
+  .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+  .tid{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.3px}
+  .pri{font-size:10px;text-transform:capitalize;border-radius:4px;padding:1px 6px;font-weight:700}
+  .p-high{background:#7f1d1d;color:#fecaca}.p-med{background:#78350f;color:#fde68a}.p-low{background:#1e3a5f;color:#bfdbfe}
+  .ctitle{font-weight:600;margin-bottom:7px}
+  .meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .tag{background:#0b1220;color:#9fb3c8;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:11px}
+  .tag.more{color:var(--muted)}
+  .who{margin-left:auto;color:#7dd3fc;font-size:11px}
+  .empty{color:var(--muted);text-align:center;padding:18px 0;font-size:12px}
+  footer{color:var(--muted);font-size:12px;padding:4px 20px 24px}
+</style></head>
+<body>
+  <div class="banner">Read-only snapshot of the <b>ModuleWarden</b> backlog (board view, powered by Backlog.md). Edits are not pushed to the source repo.</div>
+  <div class="top"><h1>ModuleWarden</h1><span class="sub">Backlog &mdash; Kanban</span></div>
+  <div class="bar"><span>58 tasks</span><span>5 columns</span></div>
+  <div class="board">
+    <section class="col">
+      <header class="col-h"><span>To Do</span><span class="count">28</span></header>
+      <div class="col-body">
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-2</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Run corpus_walker (python -m) Saturday on scraped-cases-overnight.jsonl (8510 cases)</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">sft</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-3</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Run rehearsal smoke on Qwen2.5-1.5B with new sft-records.jsonl before Leonardo run</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">smoke</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-4</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Fill ACCOUNT placeholder in train_qwen3.6.slurm and launch Leonardo SLURM job</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">slurm</span><span class="tag">leonardo</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-5</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Launch Recipe A vast.ai 7B QLoRA safety-net run in parallel with Leonardo</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">training</span><span class="tag">safety-net</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-6</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement Underwriter View recharts integration in packages/web-ui (recharts dep + 6 components scaffolded)</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">web-ui</span><span class="tag">recharts</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-7</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Record 60-second backup demo video per finetune/python/pitch/video-script.md</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">demo</span><span class="tag">video</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-8</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Execute finetune/python/pitch/preflight-checklist.md Saturday night and Sunday morning</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">preflight</span><span class="tag">sunday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-9</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Apply UNIQA case-reveal reframe after Friday 20:30 brief drop</div>
+    <div class="meta">
+      <span class="tag">pitch</span><span class="tag">uniqa</span><span class="tag">case-reveal</span><span class="tag">friday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-10</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Set GITHUB_TOKEN in .env to raise scraper rate limit to 5000/hr</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">scraper</span><span class="tag">pat</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-11</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Run expanded scrape overnight Friday with max-pages 30</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">scraper</span><span class="tag">friday-overnight</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-12</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Pull scraped-cases.npm-enriched.jsonl from Nextcloud before Saturday walker</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">nextcloud</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-13</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Seed 20 benign npm packages via finetune/python/data/benign-packages/seed.sh (unblocks synthetic track)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">synthetic</span><span class="tag">benign-baseline</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-14</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Push benign-packages-seed.tar.gz + sft-records.jsonl to Nextcloud</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">nextcloud</span><span class="tag">saturday</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-15</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build sample-bad-deps Docker image and run gate verification test</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">sample-project</span><span class="tag">gate-verification</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-16</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Run select-golden-cases.mjs with target 150 max-per-cwe 8 before walker</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">golden-selection</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-17</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Pre-download tarballs for golden cases to prevent walker registry stalls</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">walker</span><span class="tag">tarball-cache</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-18</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build finetune/scripts/build-dossiers.mjs per Andreas high-level-plan Step 2</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">andreas-plan</span><span class="tag">mjs-pipeline</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-19</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build finetune/scripts/validate-audit-report.mjs per Andreas high-level-plan Step 4</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">andreas-plan</span><span class="tag">mjs-pipeline</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-20</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build finetune/scripts/build-sft-records.mjs per Andreas high-level-plan Step 5</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">andreas-plan</span><span class="tag">mjs-pipeline</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-21</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Integrate Semgrep + OSV-Scanner + TruffleHog + Syft/Grype into dossier evidence pipeline</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">evidence</span><span class="tag">external-tools</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-30</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Epic: Security and code quality audit remediation</div>
+    <div class="meta">
+      <span class="tag">epic</span><span class="tag">security</span><span class="tag">quality</span><span class="tag">hardening</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-30</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">v3 roadmap: generalize audit-runner into a plugin registry (decepticon-core PluginBundle reference)</div>
+    <div class="meta">
+      <span class="tag">roadmap</span><span class="tag">architecture</span><span class="tag">q4</span><span class="tag">post-hackathon</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-30.1</span></div>
+    <div class="ctitle">Remove model API key from Docker container environment variables</div>
+    <div class="meta">
+      <span class="tag">security</span><span class="tag">critical</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-30.2</span></div>
+    <div class="ctitle">Implement actual predecessor-diff computation</div>
+    <div class="meta">
+      <span class="tag">logic</span><span class="tag">critical</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-30.3</span></div>
+    <div class="ctitle">Fix escalation heuristic and implement second-pass model review</div>
+    <div class="meta">
+      <span class="tag">logic</span><span class="tag">medium</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-30.4</span></div>
+    <div class="ctitle">Add rate limiting to all API endpoints</div>
+    <div class="meta">
+      <span class="tag">security</span><span class="tag">medium</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-31</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Add cold-start LLM verifier as a MEASURED arm-5 in the eval matrix (gated on beating arm-2)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">eval</span><span class="tag">roadmap</span><span class="tag">decision-4</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-32</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build figshare NPM-malware dataset adapter (arXiv:2603.27549, 13708 labeled pkgs)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">data</span><span class="tag">adapter</span><span class="tag">decision-5</span>
+      
+      
+    </div>
+  </div></div>
+    </section>
+    <section class="col">
+      <header class="col-h"><span>In Progress</span><span class="count">0</span></header>
+      <div class="col-body"><div class="empty">Empty</div></div>
+    </section>
+    <section class="col">
+      <header class="col-h"><span>Done</span><span class="count">28</span></header>
+      <div class="col-body">
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-1</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Epic: ModuleWarden v1 private agentic version-diff gate</div>
+    <div class="meta">
+      <span class="tag">epic</span><span class="tag">v1</span><span class="tag">product</span><span class="tag">security</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.1</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Design the v1 architecture and threat model contract</div>
+    <div class="meta">
+      <span class="tag">architecture</span><span class="tag">threat-model</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.2</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Scaffold the TypeScript monorepo and Docker Compose stack</div>
+    <div class="meta">
+      <span class="tag">infra</span><span class="tag">typescript</span><span class="tag">docker</span><span class="tag">prisma</span>
+      <span class="tag more">+2</span>
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.3</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement Postgres schema for packages, audits, decisions, and evidence lineage</div>
+    <div class="meta">
+      <span class="tag">database</span><span class="tag">prisma</span><span class="tag">provenance</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.4</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Build the npm proxy with approved-only metadata and Verdaccio promotion</div>
+    <div class="meta">
+      <span class="tag">npm</span><span class="tag">proxy</span><span class="tag">verdaccio</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.5</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement lockfile import, used-graph subscriptions, and proactive upstream auditing</div>
+    <div class="meta">
+      <span class="tag">lockfile</span><span class="tag">subscriptions</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.6</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Create isolated per-job Docker audit runner with recorded-open egress</div>
+    <div class="meta">
+      <span class="tag">sandbox</span><span class="tag">docker</span><span class="tag">security</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.7</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Integrate PI RPC agentic audit harness and ModuleWarden tool API</div>
+    <div class="meta">
+      <span class="tag">pi</span><span class="tag">agent</span><span class="tag">tools</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.8</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Build private core prompt packs, custom prompts, escalation, and re-audit scheduling</div>
+    <div class="meta">
+      <span class="tag">prompts</span><span class="tag">models</span><span class="tag">reaudit</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.9</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement capability-delta extraction and evidence preparation for version diffs</div>
+    <div class="meta">
+      <span class="tag">analysis</span><span class="tag">diff</span><span class="tag">evidence</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.10</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement verdict policy, security-admin overrides, and developer-safe failure messages</div>
+    <div class="meta">
+      <span class="tag">policy</span><span class="tag">auth</span><span class="tag">dx</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.11</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Build the ModuleWarden developer CLI</div>
+    <div class="meta">
+      <span class="tag">cli</span><span class="tag">dx</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.12</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Build the admin visibility dashboard for audit runs, queue, evidence, prompts, and overrides</div>
+    <div class="meta">
+      <span class="tag">web-ui</span><span class="tag">admin-dashboard</span><span class="tag">audit-visibility</span><span class="tag">security-review</span>
+      <span class="tag more">+1</span>
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.13</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Create real-incident replay evaluation harness and quality metrics</div>
+    <div class="meta">
+      <span class="tag">evaluation</span><span class="tag">security</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.14</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Add security tests for prompt secrecy, secret isolation, and malicious package behavior</div>
+    <div class="meta">
+      <span class="tag">security-tests</span><span class="tag">prompts</span><span class="tag">sandbox</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.15</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Write operator and developer documentation for v1 semantics and workflows</div>
+    <div class="meta">
+      <span class="tag">docs</span><span class="tag">dx</span><span class="tag">v1</span>
+      
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.16</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement pg-boss event and job orchestration</div>
+    <div class="meta">
+      <span class="tag">jobs</span><span class="tag">events</span><span class="tag">pg-boss</span><span class="tag">postgres</span>
+      <span class="tag more">+1</span>
+      
+    </div>
+  </div>
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.17</span></div>
+    <div class="ctitle">Review and harden v1 core implementation</div>
+    <div class="meta">
+      <span class="tag">review</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-22</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Decide Python vs MJS pipeline: corpus_walker.py exists; build-dossiers.mjs proposed - pick one canonical path</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">architecture-decision</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-23</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Run pnpm install at repo root to refresh lockfile with recharts before web-ui build</div>
+    <div class="meta">
+      <span class="tag">web-ui</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-24</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Verify scraped-cases-overnight.jsonl is 8510 lines before running walker (failsafe)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">saturday-morning</span><span class="tag">failsafe</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-25</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Add outlines or MiniOneRec constrained decoding for guaranteed JSON validity (TBD which path)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">decoding</span><span class="tag">saturday-afternoon</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-26</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Evaluate ExploitBench as cross-domain eval target for trained model (TBD if useful)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">eval</span><span class="tag">sunday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-27</span><span class="pri p-med">medium</span></div>
+    <div class="ctitle">Consider Unsloth swap for Option A vast.ai 7B QLoRA (TBD pending validation)</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">training</span><span class="tag">saturday-morning</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-29</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Remove all fallback paths — replace with fail-early validation</div>
+    <div class="meta">
+      <span class="tag">quality</span><span class="tag">reliability</span><span class="tag">startup-validation</span><span class="tag">hardening</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-33</span></div>
+    <div class="ctitle">Ship injection-hardening + activation-steering for the audit LLM</div>
+    <div class="meta">
+      <span class="tag">finetune</span><span class="tag">security</span><span class="tag">saturday-afternoon</span>
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-34</span></div>
+    <div class="ctitle">Ship adaptive steering layer: registry + CAST + calibration</div>
+    <div class="meta">
+      
+      
+      
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-35</span></div>
+    <div class="ctitle">Ship served-path prompt defense (spotlight + instruction hierarchy)</div>
+    <div class="meta">
+      
+      
+      
+    </div>
+  </div></div>
+    </section>
+    <section class="col">
+      <header class="col-h"><span>Open</span><span class="count">1</span></header>
+      <div class="col-body">
+  <div class="card sub">
+    <div class="card-top"><span class="tid">TASK-1.18</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Implement DAG-linearised audit ordering for dependency-aware reviews</div>
+    <div class="meta">
+      <span class="tag">dag</span><span class="tag">scheduling</span><span class="tag">ordering</span><span class="tag">v1</span>
+      <span class="tag more">+1</span>
+      
+    </div>
+  </div></div>
+    </section>
+    <section class="col">
+      <header class="col-h"><span>Superseded</span><span class="count">1</span></header>
+      <div class="col-body">
+  <div class="card">
+    <div class="card-top"><span class="tid">TASK-28</span><span class="pri p-high">high</span></div>
+    <div class="ctitle">Remove file-only audit fallback from agentic audits</div>
+    <div class="meta">
+      <span class="tag">audit-runner</span><span class="tag">e2e</span><span class="tag">requirement</span>
+      
+      
+    </div>
+  </div></div>
+    </section></div>
+  <footer>Generated 2026-05-29 15:29 UTC &middot; static snapshot</footer>
+</body></html>
