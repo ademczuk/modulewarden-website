@@ -1,28 +1,40 @@
 name: leonardo-queue
 
-# Polls the Leonardo Slurm reservation and refreshes leonardo/queue.json so the
-# static dashboard at /leonardo/ stays current for the whole team without anyone
-# running anything locally. Credentials live in repo secrets (LEONARDO_USER,
-# LEONARDO_PASSWORD); the data committed is non-sensitive (job ids, usernames).
+# Refreshes the live Leonardo queue dashboard at /leonardo/ for the whole team
+# with no one running anything locally. Each run polls the Slurm reservation,
+# writes leonardo/queue.json, and deploys the site itself.
 #
-# Scheduled runs can be delayed several minutes by GitHub under load; use the
-# CLI dashboard (--watch) for real-time.
+# It deploys Pages directly instead of committing queue.json, because a commit
+# pushed with the default GITHUB_TOKEN does NOT trigger the pages.yml deploy
+# workflow (GitHub's loop-prevention). Deploying here is the only path that
+# actually reaches the served site. The committed leonardo/queue.json is just a
+# seed; live data is the deployed artifact.
+#
+# Credentials are repo secrets (LEONARDO_USER, LEONARDO_PASSWORD). Data deployed
+# is non-sensitive (job ids, usernames, node counts). Scheduled runs can be
+# delayed several minutes by GitHub; use the CLI dashboard (--watch) for realtime.
 
 on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
 
+# Share the "pages" concurrency group with pages.yml so content deploys and
+# queue refreshes serialize instead of racing.
 concurrency:
-  group: leonardo-queue
+  group: pages
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  poll:
+  refresh:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -39,14 +51,9 @@ jobs:
           LEONARDO_PASSWORD: ${{ secrets.LEONARDO_PASSWORD }}
         run: python leonardo/publish_queue.py --out leonardo/queue.json
 
-      - name: Commit if changed
-        run: |
-          if git diff --quiet -- leonardo/queue.json; then
-            echo "no change"
-            exit 0
-          fi
-          git config user.name "leonardo-queue-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add leonardo/queue.json
-          git commit -m "data: refresh leonardo queue snapshot"
-          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - id: deploy
+        uses: actions/deploy-pages@v4
