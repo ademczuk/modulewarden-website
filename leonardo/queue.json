@@ -1,5 +1,5 @@
 {
-  "generated_epoch": 1780100294,
+  "generated_epoch": 1780100371,
   "reservation": "s_tra_ncc",
   "account": "euhpc_d30_031",
   "partition": "boost_usr_prod",
@@ -20,13 +20,26 @@
       "user": "a08trc01",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "5:49",
+      "time": "7:05",
       "limit": "3:00:00",
       "reason": "None",
       "where": "login08",
       "start": "2026-05-30T02:12:28",
       "mine": true,
       "role": "devops/decepticon"
+    },
+    {
+      "id": "43031108",
+      "user": "a08trc02",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "1:09",
+      "limit": "2:00:00",
+      "reason": "None",
+      "where": "login08",
+      "start": "2026-05-30T02:18:24",
+      "mine": true,
+      "role": "finetune/petersson"
     }
   ],
   "queue": [
@@ -35,7 +48,7 @@
       "user": "a08trc23",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "8:43",
+      "time": "9:59",
       "limit": "30:00",
       "reason": "None",
       "where": "lrdn0080",
@@ -48,7 +61,7 @@
       "user": "a08trc23",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "8:43",
+      "time": "9:59",
       "limit": "30:00",
       "reason": "None",
       "where": "lrdn0080",
@@ -61,13 +74,39 @@
       "user": "a08trd15",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:12",
+      "time": "2:28",
       "limit": "8:00:00",
       "reason": "None",
       "where": "lrdn0058",
       "start": "2026-05-30T02:17:06",
       "mine": false,
       "role": "a08trd15"
+    },
+    {
+      "id": "43031122_0",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "0:11",
+      "limit": "4:00:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:19:23",
+      "mine": false,
+      "role": "a08trc23"
+    },
+    {
+      "id": "43031122_1",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "0:11",
+      "limit": "4:00:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:19:23",
+      "mine": false,
+      "role": "a08trc23"
     }
   ]
 }
