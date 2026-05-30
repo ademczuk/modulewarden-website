@@ -4,11 +4,12 @@ name: leonardo-queue
 # with no one running anything locally. Each run polls the Slurm reservation,
 # writes leonardo/queue.json, and deploys the site itself.
 #
-# It deploys Pages directly instead of committing queue.json, because a commit
-# pushed with the default GITHUB_TOKEN does NOT trigger the pages.yml deploy
-# workflow (GitHub's loop-prevention). Deploying here is the only path that
-# actually reaches the served site. The committed leonardo/queue.json is just a
-# seed; live data is the deployed artifact.
+# It both commits the fresh queue.json AND self-deploys Pages. Self-deploy is
+# needed because a GITHUB_TOKEN commit does NOT trigger pages.yml (loop-prevention),
+# so deploying here is the only path that reaches the served site between content
+# pushes. The commit is needed so that when someone DOES push site content (which
+# triggers pages.yml to redeploy the whole repo), the committed queue.json is recent
+# and not a stale seed that clobbers the live data.
 #
 # Credentials are repo secrets (LEONARDO_USER, LEONARDO_PASSWORD). Data deployed
 # is non-sensitive (job ids, usernames, node counts). Scheduled runs can be
@@ -26,6 +27,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
+  contents: write
   pages: write
   id-token: write
 
@@ -50,6 +52,16 @@ jobs:
           LEONARDO_USER: ${{ secrets.LEONARDO_USER }}
           LEONARDO_PASSWORD: ${{ secrets.LEONARDO_PASSWORD }}
         run: python leonardo/publish_queue.py --out leonardo/queue.json
+
+      - name: Commit fresh snapshot so content deploys never serve stale data
+        run: |
+          if ! git diff --quiet -- leonardo/queue.json; then
+            git config user.name "leonardo-queue-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add leonardo/queue.json
+            git commit -m "data: refresh leonardo queue snapshot [skip ci]"
+            git push
+          fi
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
