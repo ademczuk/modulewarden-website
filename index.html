@@ -286,6 +286,39 @@
   </div>
 </section>
 
+<!-- real review queue: the headline claim as a real artifact -->
+<section class="py-24 border-t border-slate-800/60">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="max-w-3xl mb-10">
+      <p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-4 mono">The claim, made real</p>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Rank by trajectory, on real packages.</h2>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        We forecast a real set of npm packages and ranked them by forecasted 6-month growth scaled by blast radius. The climbers surface first, the decliners sink, and when the forecast band is too wide to call, the dependency routes to a human instead of a guess. Every number is from a live forecast.
+      </p>
+    </div>
+    <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950">
+      <table class="w-full text-sm">
+        <thead class="text-slate-500 mono text-xs uppercase tracking-wider">
+          <tr class="border-b border-slate-800">
+            <th class="text-left p-4">#</th><th class="text-left p-4">package</th>
+            <th class="text-right p-4">M/month</th><th class="text-right p-4">fc 6m growth</th>
+            <th class="text-right p-4">6m MAPE</th><th class="text-left p-4">action</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-300">
+          <tr class="border-b border-slate-900"><td class="p-4 text-slate-500">1</td><td class="p-4 font-semibold">react</td><td class="p-4 text-right mono">526</td><td class="p-4 text-right mono text-emerald-300">+31%</td><td class="p-4 text-right mono">14.3%</td><td class="p-4 text-amber-300/80">route to human</td></tr>
+          <tr class="border-b border-slate-900"><td class="p-4 text-slate-500">2</td><td class="p-4 font-semibold">lodash</td><td class="p-4 text-right mono">612</td><td class="p-4 text-right mono text-emerald-300">+10%</td><td class="p-4 text-right mono">15.6%</td><td class="p-4 text-amber-300/80">route to human</td></tr>
+          <tr class="border-b border-slate-900"><td class="p-4 text-slate-500">3</td><td class="p-4 font-semibold">request</td><td class="p-4 text-right mono">67</td><td class="p-4 text-right mono text-slate-400">-2%</td><td class="p-4 text-right mono">17.5%</td><td class="p-4 text-slate-400">queue by rank</td></tr>
+          <tr class="border-b border-slate-900"><td class="p-4 text-slate-500">4</td><td class="p-4 font-semibold">moment</td><td class="p-4 text-right mono">135</td><td class="p-4 text-right mono text-slate-400">-2%</td><td class="p-4 text-right mono">9.2%</td><td class="p-4 text-amber-300/80">route to human</td></tr>
+          <tr class="border-b border-slate-900"><td class="p-4 text-slate-500">5</td><td class="p-4 font-semibold">chalk</td><td class="p-4 text-right mono">1773</td><td class="p-4 text-right mono text-slate-400">-22%</td><td class="p-4 text-right mono">7.6%</td><td class="p-4 text-slate-400">queue by rank</td></tr>
+          <tr><td class="p-4 text-slate-500">6</td><td class="p-4 font-semibold">date-fns</td><td class="p-4 text-right mono">328</td><td class="p-4 text-right mono text-slate-400">-60%</td><td class="p-4 text-right mono">27.9%</td><td class="p-4 text-amber-300/80">route to human</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-6 leading-relaxed max-w-3xl">Four of six route to a human because the forecast band is wider than the median: it prioritizes, it does not pretend precision. The deterministic gate still owns the verdict. Reproducible with <a href="https://github.com/apetersson/ModuleWarden/blob/main/demo/forecast_review_queue.py" class="underline text-emerald-300 hover:text-emerald-200">forecast_review_queue.py</a>; full table in <a href="https://github.com/apetersson/ModuleWarden/blob/main/docs/sybillion-api/REVIEW-QUEUE.md" class="underline text-emerald-300 hover:text-emerald-200">REVIEW-QUEUE.md</a>.</p>
+  </div>
+</section>
+
 <!-- the real supply chain: systemic-risk reveal -->
 <section class="relative overflow-hidden border-t border-slate-800/60 py-24 md:py-32">
   <div class="absolute inset-0 radial pointer-events-none"></div>
