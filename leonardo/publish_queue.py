@@ -31,7 +31,15 @@ DEFAULT_LOGIN = "login01-ext.leonardo.cineca.it"
 GPUS_PER_NODE = 4
 FREE_STATES = {"idle", "resv"}
 BUSY_STATES = {"mix", "alloc", "comp"}
-TEAM_ROLES = {"a08trc01": "devops/decepticon", "a08trc02": "finetune/petersson"}
+# Confirmed team accounts get role labels; the rest of the shared tra26_minwinsc
+# cohort (the Leonardo group a08trc01/a08trc02 both belong to) is tracked too, so
+# no teammate's job is ever missed whatever trainee login they submit from.
+ROLES = {"a08trc01": "devops/decepticon", "a08trc02": "finetune/petersson"}
+COHORT = [
+    "a08trc01", "a08trc02", "a08trc0e", "a08trc0r", "a08trc0v", "a08trc0x",
+    "a08trc11", "a08trc13", "a08trc14", "a08trc16", "a08trc17", "a08trc21",
+    "a08trc22", "a08trc23",
+]
 FMT = "%i|%u|%T|%D|%M|%l|%r|%R|%S"
 
 
@@ -67,7 +75,7 @@ def parse_jobs(text: str, accounts: set[str]) -> list[dict]:
         if len(parts) >= len(keys) and parts[0] and parts[0] != "JOBID":
             j = dict(zip(keys, parts))
             j["mine"] = j["user"] in accounts
-            j["role"] = TEAM_ROLES.get(j["user"], j["user"])
+            j["role"] = ROLES.get(j["user"], j["user"])
             out.append(j)
     return out
 
@@ -75,7 +83,7 @@ def parse_jobs(text: str, accounts: set[str]) -> list[dict]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--reservation", default=DEFAULT_RESERVATION)
-    ap.add_argument("--accounts", default=",".join(TEAM_ROLES))
+    ap.add_argument("--accounts", default=",".join(COHORT))
     ap.add_argument("--out", default=str(pathlib.Path(__file__).with_name("queue.json")))
     args = ap.parse_args()
     accounts = {a.strip() for a in args.accounts.split(",") if a.strip()}

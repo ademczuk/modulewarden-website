@@ -1,5 +1,5 @@
 {
-  "generated_epoch": 1780100498,
+  "generated_epoch": 1780106121,
   "reservation": "s_tra_ncc",
   "account": "euhpc_d30_031",
   "partition": "boost_usr_prod",
@@ -9,116 +9,23 @@
   "end_epoch": 1780221600,
   "nodes": {
     "total": 25,
-    "free": 23,
-    "busy": 2,
+    "free": 24,
+    "busy": 1,
     "other": 0,
-    "free_gpus_est": 92
+    "free_gpus_est": 96
   },
   "team": [
-    {
-      "id": "43030226",
-      "user": "a08trc01",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "9:12",
-      "limit": "3:00:00",
-      "reason": "None",
-      "where": "login08",
-      "start": "2026-05-30T02:12:28",
-      "mine": true,
-      "role": "devops/decepticon"
-    },
-    {
-      "id": "43031108",
-      "user": "a08trc02",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "3:16",
-      "limit": "2:00:00",
-      "reason": "None",
-      "where": "login08",
-      "start": "2026-05-30T02:18:24",
-      "mine": true,
-      "role": "finetune/petersson"
-    }
-  ],
-  "queue": [
-    {
-      "id": "43030097_5",
-      "user": "a08trc23",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "12:06",
-      "limit": "30:00",
-      "reason": "None",
-      "where": "lrdn0080",
-      "start": "2026-05-30T02:09:35",
-      "mine": false,
-      "role": "a08trc23"
-    },
-    {
-      "id": "43031034",
-      "user": "a08trd15",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "4:35",
-      "limit": "8:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-30T02:17:06",
-      "mine": false,
-      "role": "a08trd15"
-    },
-    {
-      "id": "43031142_3",
-      "user": "a08trc14",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "0:41",
-      "limit": "3:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-30T02:21:00",
-      "mine": false,
-      "role": "a08trc14"
-    },
-    {
-      "id": "43031142_4",
-      "user": "a08trc14",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "0:41",
-      "limit": "3:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-30T02:21:00",
-      "mine": false,
-      "role": "a08trc14"
-    },
-    {
-      "id": "43031142_5",
-      "user": "a08trc14",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "0:41",
-      "limit": "3:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-30T02:21:00",
-      "mine": false,
-      "role": "a08trc14"
-    },
     {
       "id": "43031122_0",
       "user": "a08trc23",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "2:18",
+      "time": "1:36:02",
       "limit": "4:00:00",
       "reason": "None",
       "where": "lrdn0080",
       "start": "2026-05-30T02:19:23",
-      "mine": false,
+      "mine": true,
       "role": "a08trc23"
     },
     {
@@ -126,12 +33,40 @@
       "user": "a08trc23",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "2:18",
+      "time": "1:36:02",
       "limit": "4:00:00",
       "reason": "None",
       "where": "lrdn0080",
       "start": "2026-05-30T02:19:23",
-      "mine": false,
+      "mine": true,
+      "role": "a08trc23"
+    }
+  ],
+  "queue": [
+    {
+      "id": "43031122_0",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "1:36:03",
+      "limit": "4:00:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:19:23",
+      "mine": true,
+      "role": "a08trc23"
+    },
+    {
+      "id": "43031122_1",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "1:36:03",
+      "limit": "4:00:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:19:23",
+      "mine": true,
       "role": "a08trc23"
     }
   ]
