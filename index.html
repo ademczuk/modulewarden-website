@@ -834,7 +834,7 @@
       <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">The trained model, side by side</h2>
       <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Same 27B. Our adapter is the only difference.</h3>
       <p class="text-lg text-slate-400 leading-relaxed">
-        We ran a held-out audit dossier through the published 27B twice on four A100s: once with our LoRA adapter off, once on. Nothing else changed. The stock base does not know our report schema and says so. The fine-tuned auditor recovers the exact schema and reproduces the human verdict on a package it never trained on.
+        We ran a held-out audit dossier through the published 27B twice on four A100s: once with our LoRA adapter off, once on. Nothing else changed. The stock base does not know our report schema and drifts to the wrong keys. The fine-tuned auditor recovers the exact schema and report contract on a package it never trained on. The verdict itself stays with the deterministic gate.
       </p>
     </div>
     <div class="grid md:grid-cols-2 gap-5">
@@ -862,10 +862,10 @@ primary_findings: [ { finding_id, category,
 benign_explanations_considered: [ ... ]
 recommended_agent_checks: [ ... ]
 output_integrity: { all_claims_have_evidence_refs: true }</pre>
-        <p class="text-xs text-emerald-300/80 mt-4 leading-relaxed">Recovers the exact audit_report.v1 schema, recites the policy, and matches the human gold verdict.</p>
+        <p class="text-xs text-emerald-300/80 mt-4 leading-relaxed">Recovers the exact audit_report.v1 schema and recites the policy. The verdict stays with the deterministic gate, not the model.</p>
       </div>
     </div>
-    <p class="text-xs text-slate-500 mt-6 leading-relaxed max-w-3xl">Held-out validation dossier. The 27B base (huihui Qwen3.6-27B) plus our LoRA, four A100s on Leonardo, the same stack that trained it, adapter published to Hugging Face. Honest read: this is schema and narration fidelity, not a detection number. The deterministic gate stays the verdict authority. Full transcript and the script: <a href="https://github.com/apetersson/ModuleWarden/tree/main/demo/leonardo-ab" class="underline text-emerald-300 hover:text-emerald-200">demo/leonardo-ab/</a>.</p>
+    <p class="text-xs text-slate-500 mt-6 leading-relaxed max-w-3xl">Held-out validation dossier. The 27B base (huihui Qwen3.6-27B) plus our LoRA, four A100s on Leonardo, the same stack that trained it, adapter published to Hugging Face. Honest read: this is schema and report-contract fidelity, not a detection number. On 30 held-out dossiers the adapter emits the valid schema 30/30 where the base drifts to wrong keys; verdict-match is 0.467, which is just the quarantine base rate, because the tuned model defaults to quarantine. That is exactly why the deterministic gate, not the model, is the verdict authority. Full transcript and the script: <a href="https://github.com/apetersson/ModuleWarden/tree/main/demo/leonardo-ab" class="underline text-emerald-300 hover:text-emerald-200">demo/leonardo-ab/</a>.</p>
     <figure class="mt-10 rounded-xl border border-slate-800 bg-slate-950 overflow-hidden">
       <img src="media/leonardo-queue.png" alt="Our team's live job queue on the CINECA Leonardo A100 reservation, several finetune and inference jobs running" class="w-full" loading="lazy">
       <figcaption class="text-xs text-slate-500 p-5 leading-relaxed">Not a stock photo. Our team's live job queue on the CINECA Leonardo reservation (s_tra_ncc, account euhpc_d30_031, partition boost_usr_prod), captured during the run: finetune and inference jobs RUNNING on A100 booster nodes, reservation window closing 2026-05-31. The same nodes that trained the adapter above.</figcaption>
