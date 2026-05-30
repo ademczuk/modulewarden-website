@@ -689,7 +689,7 @@
       <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">How we measure accuracy</h2>
       <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Four arms. One held-out test set.</h3>
       <p class="text-lg text-slate-400 leading-relaxed">
-        The LLM audit only ships when the numbers justify it. The four-arm bench below is the measurement design, reproducible against <a href="https://github.com/apetersson/ModuleWarden/blob/main/finetune/README.md" class="underline text-emerald-300 hover:text-emerald-200">finetune/README.md</a>. So far we have run arms A and B on a small model (Qwen2.5-Coder QLoRA, 386 real GHSA records): base 0 percent to fine-tuned 73.9 percent verdict reproduction on a held-out test split, with 0 of 5 block-recall. The deterministic gate, not the model, catches the severe cases today. Arms C and D and the 27B are the scale-up.
+        The LLM audit only ships when the numbers justify it. The four-arm bench below is the measurement design, reproducible against <a href="https://github.com/apetersson/ModuleWarden/blob/main/finetune/README.md" class="underline text-emerald-300 hover:text-emerald-200">finetune/README.md</a>. So far we have run arms A and B on a small model (Qwen2.5-Coder QLoRA, 386 real GHSA records): base 0 percent to fine-tuned 73.9 percent verdict reproduction on a held-out test split, with 0 of 5 block-recall. The deterministic gate, not the model, catches the severe cases today. The 27B auditor is now trained on Leonardo A100s and published to Hugging Face (held-out val loss 0.21, narration fidelity); arms C and D are the agentic scale-up.
       </p>
     </div>
 
@@ -699,7 +699,7 @@
           <span class="text-xs font-bold mono text-slate-500">ARM A</span>
           <span class="text-sm font-semibold text-slate-200">Base model, one-shot</span>
         </div>
-        <p class="text-sm text-slate-400 leading-relaxed">Vanilla base model (Qwen2.5-Coder today; Qwen3.6-27B is the scale-up target, not yet trained) receives the audit dossier and emits a single verdict. Sets the floor: what does a model get right with zero training and no tools?</p>
+        <p class="text-sm text-slate-400 leading-relaxed">Vanilla base model (Qwen2.5-Coder small; the Qwen3.6-27B auditor is now trained and published) receives the audit dossier and emits a single verdict. Sets the floor: what does a model get right with zero training and no tools?</p>
       </div>
       <div class="bg-slate-900/40 border border-emerald-500/30 rounded-xl p-6">
         <div class="flex items-baseline gap-3 mb-2">
@@ -760,6 +760,48 @@
       </div>
       <p class="text-xs text-slate-500 mt-5 leading-relaxed">Reproducible from the corpus and the scripts in <a href="https://github.com/apetersson/ModuleWarden/tree/main/finetune" class="underline text-emerald-300 hover:text-emerald-200">finetune/</a>. The deterministic gate is the verdict authority; the static forecast is a weak prior today, and the embedding of the version delta is where a real probabilistic layer comes from.</p>
     </div>
+  </div>
+</section>
+
+<!-- live A/B: the trained model, side by side -->
+<section class="py-24 border-t border-slate-800/60 bg-slate-900/20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-sm font-semibold text-emerald-400 mb-3 uppercase tracking-wider">The trained model, side by side</h2>
+      <h3 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Same 27B. Our adapter is the only difference.</h3>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        We ran a held-out audit dossier through the published 27B twice on four A100s: once with our LoRA adapter off, once on. Nothing else changed. The stock base does not know our report schema and says so. The fine-tuned auditor recovers the exact schema and reproduces the human verdict on a package it never trained on.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="rounded-xl border border-slate-800 bg-slate-950 p-6">
+        <div class="text-xs text-slate-500 uppercase tracking-wider mb-3">Adapter off: the stock base</div>
+        <pre class="text-xs text-slate-400 whitespace-pre-wrap leading-relaxed mono">Since I don't have the exact schema definition
+for modulewarden.audit_report.v1, I'll infer a
+standard structure.
+
+verdict: "quarantine"
+findings: [ { type, description, evidence_refs } ]
+cited_evidence: [ ... ]
+policy_applied: "quarantine_on_uncertainty"</pre>
+        <p class="text-xs text-slate-500 mt-4 leading-relaxed">Guesses a generic shape. Invents fields that are not in the real schema.</p>
+      </div>
+      <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-6">
+        <div class="text-xs text-emerald-400 uppercase tracking-wider mb-3">Adapter on: the ModuleWarden auditor</div>
+        <pre class="text-xs text-slate-300 whitespace-pre-wrap leading-relaxed mono">verdict: "quarantine"
+confidence: "medium"
+risk_level: "high"
+summary: "tmp@0.2.6 is quarantined: observed
+  capability deltas exceed the declared purpose..."
+primary_findings: [ { finding_id, category,
+  severity, claim, evidence_refs, why_it_matters } ]
+benign_explanations_considered: [ ... ]
+recommended_agent_checks: [ ... ]
+output_integrity: { all_claims_have_evidence_refs: true }</pre>
+        <p class="text-xs text-emerald-300/80 mt-4 leading-relaxed">Recovers the exact audit_report.v1 schema, recites the policy, and matches the human gold verdict.</p>
+      </div>
+    </div>
+    <p class="text-xs text-slate-500 mt-6 leading-relaxed max-w-3xl">Held-out validation dossier. The 27B base (huihui Qwen3.6-27B) plus our LoRA, four A100s on Leonardo, the same stack that trained it, adapter published to Hugging Face. Honest read: this is schema and narration fidelity, not a detection number. The deterministic gate stays the verdict authority. Full transcript and the script: <a href="https://github.com/apetersson/ModuleWarden/tree/main/demo/leonardo-ab" class="underline text-emerald-300 hover:text-emerald-200">demo/leonardo-ab/</a>.</p>
   </div>
 </section>
 
