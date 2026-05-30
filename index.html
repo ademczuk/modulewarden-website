@@ -234,6 +234,27 @@
   </div>
 </section>
 
+<!-- compounding risk: the quantified problem -->
+<section class="relative overflow-hidden border-t border-slate-800/60 py-24 md:py-32">
+  <div class="relative max-w-5xl mx-auto px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-5 mono">The math you can't out-review</p>
+      <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-7">
+        Every dependency you add <span class="gradient-text">multiplies the risk.</span>
+      </h2>
+      <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+        The chance that at least one of your dependencies is a supply-chain attack vector is <span class="mono text-emerald-300">1 - (1 - p)^N</span>. Even at a fraction of a percent per package, a typical app's 1,000-plus transitive dependencies push that toward certain, and a team can hand-review maybe fifty. This is the independence floor, computed by our own forecasting code. The real ecosystem, sharing registries and lockfiles, is steeper.
+      </p>
+    </div>
+    <figure class="relative mt-14 max-w-4xl mx-auto rounded-2xl overflow-hidden border border-slate-800 glow bg-slate-950">
+      <img src="media/compounding-risk.png" class="w-full block" alt="Compounded supply-chain risk against dependency complexity. The probability that at least one of N dependencies is an attack vector, one minus (one minus p) to the N, rises toward 100 percent well before a typical app's 1000-plus transitive dependencies, while a team can review only about 50." />
+    </figure>
+    <p class="text-sm text-slate-500 leading-relaxed max-w-3xl mx-auto mt-6 text-center">
+      ModuleWarden does not cut N. The deterministic gate blocks the confirmed-bad tail, and the Sybilion forecast points your fixed review budget at the dependencies climbing toward critical first, so the fifty reviews you can afford land on the ones that matter.
+    </p>
+  </div>
+</section>
+
 <!-- the real supply chain: systemic-risk reveal -->
 <section class="relative overflow-hidden border-t border-slate-800/60 py-24 md:py-32">
   <div class="absolute inset-0 radial pointer-events-none"></div>
