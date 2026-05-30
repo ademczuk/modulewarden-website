@@ -1,0 +1,73 @@
+{
+  "generated_epoch": 1780100294,
+  "reservation": "s_tra_ncc",
+  "account": "euhpc_d30_031",
+  "partition": "boost_usr_prod",
+  "state": "ACTIVE",
+  "start": "2026-05-29T20:00:00",
+  "end": "2026-05-31T12:00:00",
+  "end_epoch": 1780221600,
+  "nodes": {
+    "total": 25,
+    "free": 23,
+    "busy": 2,
+    "other": 0,
+    "free_gpus_est": 92
+  },
+  "team": [
+    {
+      "id": "43030226",
+      "user": "a08trc01",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "5:49",
+      "limit": "3:00:00",
+      "reason": "None",
+      "where": "login08",
+      "start": "2026-05-30T02:12:28",
+      "mine": true,
+      "role": "devops/decepticon"
+    }
+  ],
+  "queue": [
+    {
+      "id": "43030097_4",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "8:43",
+      "limit": "30:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:09:35",
+      "mine": false,
+      "role": "a08trc23"
+    },
+    {
+      "id": "43030097_5",
+      "user": "a08trc23",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "8:43",
+      "limit": "30:00",
+      "reason": "None",
+      "where": "lrdn0080",
+      "start": "2026-05-30T02:09:35",
+      "mine": false,
+      "role": "a08trc23"
+    },
+    {
+      "id": "43031034",
+      "user": "a08trd15",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "1:12",
+      "limit": "8:00:00",
+      "reason": "None",
+      "where": "lrdn0058",
+      "start": "2026-05-30T02:17:06",
+      "mine": false,
+      "role": "a08trd15"
+    }
+  ]
+}

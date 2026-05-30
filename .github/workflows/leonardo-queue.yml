@@ -1,0 +1,52 @@
+name: leonardo-queue
+
+# Polls the Leonardo Slurm reservation and refreshes leonardo/queue.json so the
+# static dashboard at /leonardo/ stays current for the whole team without anyone
+# running anything locally. Credentials live in repo secrets (LEONARDO_USER,
+# LEONARDO_PASSWORD); the data committed is non-sensitive (job ids, usernames).
+#
+# Scheduled runs can be delayed several minutes by GitHub under load; use the
+# CLI dashboard (--watch) for real-time.
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: leonardo-queue
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install paramiko
+        run: pip install --quiet paramiko
+
+      - name: Poll Leonardo
+        env:
+          LEONARDO_USER: ${{ secrets.LEONARDO_USER }}
+          LEONARDO_PASSWORD: ${{ secrets.LEONARDO_PASSWORD }}
+        run: python leonardo/publish_queue.py --out leonardo/queue.json
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- leonardo/queue.json; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name "leonardo-queue-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add leonardo/queue.json
+          git commit -m "data: refresh leonardo queue snapshot [skip ci]"
+          git push

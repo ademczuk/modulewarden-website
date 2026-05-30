@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ModuleWarden · Leonardo queue</title>
+  <meta name="description" content="Live view of the team's Leonardo (CINECA) Slurm reservation: node capacity and where our jobs sit in the queue." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23064e3b'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%2334d399' font-family='monospace' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06090c; --panel: #0c1117; --panel2: #11171f; --line: #1c2530;
+      --ink: #e6edf3; --dim: #8b9aab; --faint: #57606a;
+      --em: #34d399; --em2: #10b981; --emdim: #064e3b;
+      --warn: #fbbf24; --bad: #f87171; --info: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(16,185,129,.07), transparent),
+        linear-gradient(rgba(16,185,129,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,185,129,.03) 1px, transparent 1px);
+      background-size: auto, 50px 50px, 50px 50px;
+    }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+    header.top { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+    h1 { font-size: 22px; font-weight: 800; margin: 0; letter-spacing: -.01em; }
+    .grad { background: linear-gradient(110deg,#6ee7b7,#34d399 40%,#10b981 75%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { color: var(--dim); font-size: 13px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+    .dot.live { background: var(--em); box-shadow: 0 0 10px 1px rgba(52,211,153,.7); animation: pulse 1.8s ease-in-out infinite; }
+    .dot.stale { background: var(--warn); }
+    .dot.dead { background: var(--bad); }
+    @keyframes pulse { 50% { opacity: .35; } }
+    .badge { font-size: 11px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--dim); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+    @media (min-width: 760px) { .grid.cap { grid-template-columns: 1.2fr 1fr; } }
+    .card { background: linear-gradient(180deg,var(--panel),var(--panel2)); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+    .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin: 0 0 14px; font-weight: 600; }
+    .kv { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13px; border-bottom: 1px dashed rgba(255,255,255,.04); }
+    .kv:last-child { border-bottom: none; }
+    .kv .k { color: var(--dim); }
+    .kv .v { color: var(--ink); }
+    .big { font-size: 13px; }
+    .nums { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-end; }
+    .num { line-height: 1; }
+    .num b { font-size: 34px; font-weight: 800; display: block; }
+    .num span { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+    .num.free b { color: var(--em); }
+    .num.busy b { color: var(--warn); }
+    .bar { margin-top: 16px; height: 14px; border-radius: 7px; overflow: hidden; background: #0a0f14; border: 1px solid var(--line); display: flex; }
+    .bar .used { background: linear-gradient(90deg,#b45309,#fbbf24); }
+    .bar .freeseg { background: linear-gradient(90deg,#10b981,#34d399); }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th { text-align: left; color: var(--dim); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+    td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,.03); white-space: nowrap; }
+    tr.mine td { background: rgba(16,185,129,.08); }
+    tr.mine td:first-child { box-shadow: inset 3px 0 0 var(--em); }
+    .st { font-weight: 600; }
+    .st.RUNNING { color: var(--em); }
+    .st.PENDING { color: var(--warn); }
+    .st.COMPLETING, .st.CONFIGURING { color: var(--info); }
+    .st.FAILED, .st.CANCELLED { color: var(--bad); }
+    .role { color: var(--info); font-size: 11px; }
+    .tag { font-size: 10px; padding: 1px 7px; border-radius: 999px; background: var(--emdim); color: var(--em); margin-left: 8px; }
+    .muted { color: var(--faint); }
+    .empty { color: var(--faint); font-size: 13px; padding: 8px 0; }
+    footer { margin-top: 28px; color: var(--faint); font-size: 11.5px; line-height: 1.7; }
+    footer a { color: var(--dim); }
+    .err { background: rgba(248,113,113,.1); border: 1px solid rgba(248,113,113,.3); color: #fecaca; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-top: 16px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1><span class="grad">Leonardo</span> team queue</h1>
+      <span class="sub mono" id="resname">s_tra_ncc</span>
+      <span class="badge"><span class="dot" id="statusdot"></span><span id="statustext">connecting</span></span>
+      <span class="badge" id="updated">--</span>
+    </header>
+    <div class="sub">Where our jobs sit on the hackathon reservation. <span id="remaining" class="mono"></span></div>
+
+    <div id="error" class="err hidden"></div>
+
+    <div class="grid cap">
+      <div class="card">
+        <h2>Node capacity</h2>
+        <div class="nums">
+          <div class="num free"><b id="n_free">--</b><span>nodes free</span></div>
+          <div class="num busy"><b id="n_busy">--</b><span>nodes busy</span></div>
+          <div class="num"><b id="n_total">--</b><span>total</span></div>
+          <div class="num"><b id="n_gpu" class="grad">--</b><span>A100 free (est)</span></div>
+        </div>
+        <div class="bar"><div class="used" id="bar_used"></div><div class="freeseg" id="bar_free"></div></div>
+        <div class="sub" style="margin-top:10px">A whole node = 4 A100. Other teams pack 1-GPU jobs onto shared nodes, so "busy" means at least one GPU in use, not fully allocated. For a TP=4 vLLM run you want a fully free node.</div>
+      </div>
+      <div class="card">
+        <h2>Reservation</h2>
+        <div class="kv"><span class="k">account</span><span class="v mono" id="r_account">--</span></div>
+        <div class="kv"><span class="k">partition</span><span class="v mono" id="r_part">--</span></div>
+        <div class="kv"><span class="k">state</span><span class="v mono" id="r_state">--</span></div>
+        <div class="kv"><span class="k">window</span><span class="v mono" id="r_window" style="font-size:11px">--</span></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Team jobs</h2>
+        <table id="teamtbl">
+          <thead><tr><th>Job</th><th>Role</th><th>State</th><th>Time</th><th>Limit</th><th>Where / why</th><th>Start</th></tr></thead>
+          <tbody id="teambody"></tbody>
+        </table>
+        <div class="empty hidden" id="teamempty">No team jobs running or queued.</div>
+      </div>
+
+      <div class="card">
+        <h2>Reservation queue <span class="muted" style="text-transform:none;letter-spacing:0">· running first, then pending by priority</span></h2>
+        <table id="qtbl">
+          <thead><tr><th>Job</th><th>User</th><th>State</th><th>N</th><th>Time</th><th>Limit</th><th>Start</th></tr></thead>
+          <tbody id="qbody"></tbody>
+        </table>
+        <div class="empty hidden" id="qempty">Reservation idle, no jobs.</div>
+      </div>
+    </div>
+
+    <footer>
+      Data is a snapshot polled from a Leonardo login node via <span class="mono">squeue</span>/<span class="mono">scontrol</span>, refreshed server-side every ~5 min and re-read in your browser every 30 s.
+      For real-time watching use the CLI: <span class="mono">python scripts/leonardo/reservation_dashboard.py --watch 10</span>.
+      Accounts: <span class="mono">a08trc01</span> devops/decepticon, <span class="mono">a08trc02</span> finetune/petersson.
+    </footer>
+  </div>
+
+  <script>
+    const SRC = 'queue.json';
+    const REFRESH_MS = 30000;
+
+    function rel(epoch) {
+      const s = Math.max(0, Math.floor(Date.now()/1000 - epoch));
+      if (s < 60) return s + 's ago';
+      if (s < 3600) return Math.floor(s/60) + 'm ago';
+      return Math.floor(s/3600) + 'h ' + Math.floor((s%3600)/60) + 'm ago';
+    }
+    function dur(secs) {
+      if (secs <= 0) return 'EXPIRED';
+      const d = Math.floor(secs/86400), h = Math.floor((secs%86400)/3600), m = Math.floor((secs%3600)/60);
+      return (d ? d+'d ' : '') + h + 'h ' + m + 'm';
+    }
+    function esc(s) { return String(s ?? '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+    function startShort(s) {
+      if (!s || s === 'N/A' || s === 'NONE') return '';
+      return esc(s.replace('T',' ').slice(5,16));
+    }
+
+    function setStatus(kind, text) {
+      document.getElementById('statusdot').className = 'dot ' + kind;
+      document.getElementById('statustext').textContent = text;
+    }
+
+    function render(d) {
+      document.getElementById('error').classList.add('hidden');
+      document.getElementById('resname').textContent = d.reservation || 's_tra_ncc';
+      document.getElementById('updated').textContent = 'updated ' + rel(d.generated_epoch);
+
+      const age = Date.now()/1000 - d.generated_epoch;
+      if (age > 1200) setStatus('stale', 'stale (' + rel(d.generated_epoch) + ')');
+      else setStatus('live', 'live');
+
+      // reservation
+      document.getElementById('r_account').textContent = d.account || '--';
+      document.getElementById('r_part').textContent = d.partition || '--';
+      const stEl = document.getElementById('r_state');
+      stEl.textContent = d.state || '--';
+      stEl.style.color = d.state === 'ACTIVE' ? 'var(--em)' : 'var(--warn)';
+      document.getElementById('r_window').textContent = (d.start||'?') + '  to  ' + (d.end||'?');
+      if (d.end_epoch) document.getElementById('remaining').textContent = 'Reservation ends in ' + dur(d.end_epoch - Date.now()/1000) + '.';
+
+      // capacity
+      const n = d.nodes || {};
+      document.getElementById('n_free').textContent = n.free ?? '--';
+      document.getElementById('n_busy').textContent = n.busy ?? '--';
+      document.getElementById('n_total').textContent = n.total ?? '--';
+      document.getElementById('n_gpu').textContent = '~' + (n.free_gpus_est ?? '--');
+      const total = n.total || 1, used = (n.total||0) - (n.free||0);
+      document.getElementById('bar_used').style.width = (100*used/total) + '%';
+      document.getElementById('bar_free').style.width = (100*(n.free||0)/total) + '%';
+
+      // team jobs
+      const tb = document.getElementById('teambody');
+      tb.innerHTML = '';
+      const team = d.team || [];
+      document.getElementById('teamempty').classList.toggle('hidden', team.length > 0);
+      for (const j of team) {
+        const where = j.state === 'RUNNING' ? esc(j.where) : '<span class="muted">(' + esc(j.reason) + ')</span>';
+        tb.insertAdjacentHTML('beforeend',
+          `<tr class="mine"><td class="mono">${esc(j.id)}</td><td class="role">${esc(j.role||j.user)}</td>`+
+          `<td class="st ${esc(j.state)}">${esc(j.state)}</td><td class="mono">${esc(j.time)}</td>`+
+          `<td class="mono muted">${esc(j.limit)}</td><td class="mono">${where}</td><td class="mono muted">${startShort(j.start)}</td></tr>`);
+      }
+
+      // reservation queue
+      const qb = document.getElementById('qbody');
+      qb.innerHTML = '';
+      const q = d.queue || [];
+      document.getElementById('qempty').classList.toggle('hidden', q.length > 0);
+      for (const j of q) {
+        qb.insertAdjacentHTML('beforeend',
+          `<tr class="${j.mine ? 'mine' : ''}"><td class="mono">${esc(j.id)}</td><td class="mono">${esc(j.user)}${j.mine?'<span class="tag">us</span>':''}</td>`+
+          `<td class="st ${esc(j.state)}">${esc(j.state)}</td><td class="mono">${esc(j.nodes)}</td>`+
+          `<td class="mono">${esc(j.time)}</td><td class="mono muted">${esc(j.limit)}</td><td class="mono muted">${startShort(j.start)}</td></tr>`);
+      }
+    }
+
+    async function tick() {
+      try {
+        const r = await fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        render(await r.json());
+      } catch (e) {
+        setStatus('dead', 'fetch failed');
+        const el = document.getElementById('error');
+        el.textContent = 'Could not load queue.json (' + e.message + '). The publisher may not have run yet.';
+        el.classList.remove('hidden');
+      }
+    }
+    tick();
+    setInterval(tick, REFRESH_MS);
+  </script>
+</body>
+</html>
