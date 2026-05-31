@@ -1,5 +1,5 @@
 {
-  "generated_epoch": 1780211800,
+  "generated_epoch": 1780212102,
   "reservation": "s_tra_ncc",
   "account": "euhpc_d30_031",
   "partition": "boost_usr_prod",
@@ -20,35 +20,35 @@
       "user": "a08trc16",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:56:41",
+      "time": "2:01:42",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0080",
       "start": "2026-05-31T07:20:01",
       "mine": true,
       "role": "a08trc16"
+    },
+    {
+      "id": "43354607",
+      "user": "a08trc0x",
+      "state": "RUNNING",
+      "nodes": "1",
+      "time": "2:10",
+      "limit": "2:00:00",
+      "reason": "None",
+      "where": "lrdn0058",
+      "start": "2026-05-31T09:19:33",
+      "mine": true,
+      "role": "a08trc0x"
     }
   ],
   "queue": [
-    {
-      "id": "43350711",
-      "user": "a08trd0n",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "0:50",
-      "limit": "20:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-31T09:15:53",
-      "mine": false,
-      "role": "a08trd0n"
-    },
     {
       "id": "43235773",
       "user": "a08trc16",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:56:42",
+      "time": "2:01:43",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0080",
@@ -61,7 +61,7 @@
       "user": "a08trc15",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "3:11:24",
+      "time": "3:16:25",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0058",
@@ -70,17 +70,17 @@
       "role": "a08trc15"
     },
     {
-      "id": "43348160",
-      "user": "a08trd0f",
+      "id": "43354607",
+      "user": "a08trc0x",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "3:13",
-      "limit": "30:00",
+      "time": "2:11",
+      "limit": "2:00:00",
       "reason": "None",
       "where": "lrdn0058",
-      "start": "2026-05-31T09:13:30",
-      "mine": false,
-      "role": "a08trd0f"
+      "start": "2026-05-31T09:19:33",
+      "mine": true,
+      "role": "a08trc0x"
     }
   ]
 }
