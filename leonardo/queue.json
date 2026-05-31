@@ -1,5 +1,5 @@
 {
-  "generated_epoch": 1780212102,
+  "generated_epoch": 1780212402,
   "reservation": "s_tra_ncc",
   "account": "euhpc_d30_031",
   "partition": "boost_usr_prod",
@@ -20,26 +20,13 @@
       "user": "a08trc16",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "2:01:42",
+      "time": "2:06:43",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0080",
       "start": "2026-05-31T07:20:01",
       "mine": true,
       "role": "a08trc16"
-    },
-    {
-      "id": "43354607",
-      "user": "a08trc0x",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "2:10",
-      "limit": "2:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-31T09:19:33",
-      "mine": true,
-      "role": "a08trc0x"
     }
   ],
   "queue": [
@@ -48,7 +35,7 @@
       "user": "a08trc16",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "2:01:43",
+      "time": "2:06:44",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0080",
@@ -61,26 +48,13 @@
       "user": "a08trc15",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "3:16:25",
+      "time": "3:21:26",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0058",
       "start": "2026-05-31T06:05:19",
       "mine": false,
       "role": "a08trc15"
-    },
-    {
-      "id": "43354607",
-      "user": "a08trc0x",
-      "state": "RUNNING",
-      "nodes": "1",
-      "time": "2:11",
-      "limit": "2:00:00",
-      "reason": "None",
-      "where": "lrdn0058",
-      "start": "2026-05-31T09:19:33",
-      "mine": true,
-      "role": "a08trc0x"
     }
   ]
 }
