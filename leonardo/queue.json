@@ -1,5 +1,5 @@
 {
-  "generated_epoch": 1780202202,
+  "generated_epoch": 1780202501,
   "reservation": "s_tra_ncc",
   "account": "euhpc_d30_031",
   "partition": "boost_usr_prod",
@@ -9,10 +9,10 @@
   "end_epoch": 1780221600,
   "nodes": {
     "total": 25,
-    "free": 21,
-    "busy": 4,
+    "free": 20,
+    "busy": 5,
     "other": 0,
-    "free_gpus_est": 84
+    "free_gpus_est": 80
   },
   "team": [
     {
@@ -20,7 +20,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:02",
+      "time": "1:36:00",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0422",
@@ -33,7 +33,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:02",
+      "time": "1:36:00",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0440",
@@ -46,7 +46,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:02",
+      "time": "1:36:00",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0440",
@@ -61,7 +61,7 @@
       "user": "a08trd0f",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:46:07",
+      "time": "1:51:05",
       "limit": "3:30:00",
       "reason": "None",
       "where": "lrdn0454",
@@ -74,7 +74,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:03",
+      "time": "1:36:01",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0422",
@@ -87,7 +87,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:03",
+      "time": "1:36:01",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0440",
@@ -100,7 +100,7 @@
       "user": "a08trc22",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "1:31:03",
+      "time": "1:36:01",
       "limit": "1-00:00:00",
       "reason": "None",
       "where": "lrdn0440",
@@ -113,13 +113,26 @@
       "user": "a08trc15",
       "state": "RUNNING",
       "nodes": "1",
-      "time": "31:27",
+      "time": "36:25",
       "limit": "12:00:00",
       "reason": "None",
       "where": "lrdn0058",
       "start": "2026-05-31T06:05:19",
       "mine": false,
       "role": "a08trc15"
+    },
+    {
+      "id": "43211235",
+      "user": "a08trc0j",
+      "state": "COMPLETING",
+      "nodes": "1",
+      "time": "2:33",
+      "limit": "4:00:00",
+      "reason": "NonZeroExitCode",
+      "where": "lrdn0073",
+      "start": "2026-05-31T06:39:08",
+      "mine": false,
+      "role": "a08trc0j"
     }
   ]
 }
